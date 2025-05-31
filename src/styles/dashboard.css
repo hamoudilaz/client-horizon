@@ -1,0 +1,366 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  color: white;
+  background-color: #0d0c11 !important;
+}
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  margin: 20px;
+  align-items: center;
+}
+
+form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+form label {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+form input[type='text'],
+form input[type='number'],
+form select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 15px;
+  background-color: transparent;
+  border: 1px solid rgb(33, 19, 49);
+  color: rgb(149, 149, 149);
+  border-radius: 6px;
+  transition: 0.3s;
+  box-sizing: border-box; /* ✅ Prevents shrinking */
+}
+
+form select {
+  background-color: #0d0c11;
+}
+
+form input:focus,
+form select:focus {
+  border-color: #6a11cb;
+  outline: none;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+}
+
+.fee-option {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.fee-option div {
+  flex: 1;
+}
+
+.buy-btn {
+  padding: 20px;
+}
+
+.sellToken {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.tokenBox {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 0;
+}
+
+.tokenBox:has(li:only-child) {
+  grid-template-columns: 1fr;
+}
+
+h2 {
+  color: #bcbcbc;
+  white-space: nowrap;
+  font-weight: bold;
+  margin: 0px;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.tokenList {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.3s forwards;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.3s ease-in-out forwards;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 5px rgb(69, 0, 149), inset 0px 0px 5px rgb(69, 0, 149);
+}
+
+.tokenInfo {
+  color: #bcbcbc;
+  font-size: small;
+  padding: 4px;
+  overflow-wrap: break-word;
+}
+
+.value {
+  font-weight: bold;
+  color: rgb(46, 155, 0) !important;
+}
+
+@media (max-width: 1350px) {
+  ul {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .tokenList {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .tokenInfo {
+    font-size: clamp(0.7rem, 1vw, 1rem);
+  }
+
+  .sellToken {
+    flex-direction: column;
+  }
+}
+
+form a {
+  text-decoration: none;
+  background-image: linear-gradient(135deg, #1a8743, #157c3b) !important;
+
+  margin-top: 10px;
+}
+
+form a:hover {
+  background: linear-gradient(135deg, #1a8743, #157c3b);
+  transform: scale(1.03);
+}
+
+form a:active {
+  transform: scale(0.97);
+  background: linear-gradient(135deg, #145c2d, #0f4721);
+}
+
+.err {
+  color: #f44336;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.slippage input {
+  width: 100%; /* ✅ Ensures it doesn't shrink */
+  max-width: 100%;
+  flex-grow: 1;
+}
+
+.status {
+  color: white;
+  display: block;
+  background: rgba(244, 67, 54, 0.15);
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  margin-top: 8px;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.3s forwards;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.success,
+.timer {
+  padding: 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  background: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.timer {
+  padding: 0px;
+  font-size: 12px;
+  background: transparent;
+  color: #8e8e8e;
+}
+
+.trade-settings {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+/* From Uiverse.io by barisdogansutcu */
+/* From Uiverse.io by rushik0507 */
+.container {
+  margin: 0px;
+  float: right;
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+.loader {
+  fill: none;
+  stroke: #106ee8;
+  stroke-width: 10;
+  stroke-dasharray: 2, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
+.loading {
+  border-radius: 10px;
+  border: 1px solid #333;
+  float: right;
+  color: white;
+  font-size: 12px;
+  background-color: #474747;
+}
+
+.loading:hover {
+  background-color: #333;
+}
+
+.horizon-text {
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 0px 0px 80px rgba(106, 17, 203, 0.5), 0px 0px 80px rgba(37, 117, 252, 0.5);
+  padding-right: 4px;
+  transition: 0.1s ease-in-out;
+}
+
+/* From Uiverse.io by StealthWorm */
+
+.bttn,
+form a {
+  justify-content: center;
+  width: 100%;
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  display: flex;
+  line-height: 1em;
+  min-width: 140px;
+  padding: 1px;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.text {
+  text-align: center;
+  background-color: #0d0c11;
+  padding: 16px 24px;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.bttn:hover span,
+form a:hover span {
+  background: none;
+}
+
+.bttn:active {
+  opacity: 0.5;
+  transform: scale(0.99);
+}
+
+.load {
+  margin: 16px;
+}
+
+li img {
+  margin-bottom: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.switch-mode.sell {
+  color: rgb(144, 4, 4);
+}
+
+.switch-mode.buy {
+  color: green;
+}
+
+.trade-form {
+  text-align: start;
+  display: flex;
+  width: 100%;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.ownedHeader {
+  margin: 0px;
+}
+
+.container {
+  padding: 0px !important;
+  max-width: 20px !important;
+  margin: 0px !important;
+}
+
+.error-msg {
+  color: rgb(148, 50, 50);
+  margin: auto;
+}
