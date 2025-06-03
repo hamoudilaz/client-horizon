@@ -5,7 +5,7 @@ export async function getAmount(pubkey: string) {
     await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd')
   ).json();
 
-  console.log(pair);
+  console.log(pair.solana.usd);
 
   const data = await (await fetch(`https://lite-api.jup.ag/ultra/v1/balances/${pubkey}`)).json();
   const sol = data?.SOL?.uiAmount || 0;
@@ -16,5 +16,6 @@ export async function getAmount(pubkey: string) {
     usdValue: Number(usdValue),
     SOL: Number(sol.toFixed(4)),
     WSOL: Number(wsol.toFixed(4)),
+    SOLPRICE: pair.solana.usd,
   };
 }

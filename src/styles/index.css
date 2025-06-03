@@ -20,6 +20,22 @@
   }
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+label,
+div,
+li,
+a,
+strong {
+  color: rgb(206, 206, 206);
+}
+
 .bttn:disabled {
   background-color: #cccccc;
   color: #666666;
@@ -103,4 +119,71 @@
 
 .owned-tokens {
   align-self: baseline;
+}
+
+.show-mode,
+.show-valuta {
+  color: #126c0c;
+}
+
+.switch-mode {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 15px;
+  background-color: transparent;
+  border: 1px solid rgb(33, 19, 49);
+  color: rgb(149, 149, 149);
+  border-radius: 6px;
+  transition: 0.3s;
+  border: 1px solid rgb(58, 24, 121) !important;
+  box-sizing: border-box;
+}
+
+.switch-mode:hover {
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+  border-color: #6a11cb !important;
+  outline: none !important;
+  background-color: #0d0c11 !important;
+}
+
+.switch-mode:focus {
+  border-color: #6a11cb;
+  outline: none;
+  transform: scale(1.02);
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+}
+
+.config-container {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.msg-content {
+  display: flex;
+  justify-content: space-between;
+}
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-symbol {
+  position: absolute;
+  top: 43%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #7b7b7b;
+  pointer-events: none;
+}
+
+.fee-symbol {
+  position: absolute;
+  font-size: 15px;
+  top: 58%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #7b7b7b;
+  pointer-events: none;
 }

@@ -1,6 +1,7 @@
 export type settings = {
   mint: string;
-  amount: number;
+  buyAmount: number;
+  sellAmount?: number;
   slippage: number;
   fee: number;
   jitoFee: number;
@@ -21,7 +22,7 @@ export type limitArgs = (
 
 export type Mode = {
   curr: boolean;
-  mode: React.Dispatch<React.SetStateAction<settings>>;
+  onChange: React.Dispatch<React.SetStateAction<settings>>;
 };
 
 export type SwapResponse = {
@@ -38,6 +39,7 @@ export type ownAmount = {
   usdValue: number;
   SOL: number;
   WSOL: number;
+  SOLPRICE: number;
 };
 
 export type Token = {
@@ -57,3 +59,5 @@ export type Props = {
 export const refreshRef: { current: (() => Promise<void>) | null } = { current: null };
 
 export const solMint = 'So11111111111111111111111111111111111111112';
+
+export const wsolRef = { current: 0 };

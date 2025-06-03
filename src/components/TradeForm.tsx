@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { executeSwap } from '../services/buy.js';
 import { ClipLoader } from 'react-spinners';
 import { sellToken } from '../services/sell.js';
 import { usePubKey } from '../utils/usePubKey.ts';
-import { Switches } from './ui/Switch';
+import { Switches } from './ui/Switch.tsx';
 import { rateLimit } from '../services/buy.ts';
-import type { settings, InputEvent } from '../utils/constants';
+import { wsolRef, type settings, type InputEvent } from '../utils/constants.ts';
+import validateInputs from '../helpers/validateForm.tsx';
 
 export function TradeForm() {
   const [error, setError] = useState('');
@@ -13,18 +14,20 @@ export function TradeForm() {
   const [mess, setMess] = useState('');
   const [timer, setTimer] = useState('');
   const [mode, setMode] = useState(true);
+
   const [limit, setlimit] = useState(false);
-  const [amountInput, setAmountInput] = useState('0.00001');
   const [config, setConfig] = useState<settings>({
     mint: '',
-    amount: 0.00001,
+    buyAmount: 0,
+    sellAmount: 0,
     slippage: 10,
     fee: 0.000001,
-    jitoFee: 0,
+    jitoFee: 0.00001,
     node: false,
   });
 
   const { setPubKey } = usePubKey();
+  const modeRef = useRef(mode);
 
   async function buy(cfg: settings) {
     setLoading(true);
@@ -53,22 +56,17 @@ export function TradeForm() {
   }
 
   const validateForm = () => {
-    if (config.mint.length < 43 || config.mint.length > 44) {
-      setError('Invalid contract address');
+    const wsol = wsolRef.current;
+    console.log(config);
+    console.log('VALIDATING MODE:', mode);
+
+    const result = validateInputs(config, wsol, mode);
+
+    if (result !== true) {
+      setError(result);
       return false;
     }
-    if (config.amount <= 0 || config.amount >= 5) {
-      setError('Amount must be between 0 and 5');
-      return false;
-    }
-    if (config.slippage <= 0.01) {
-      setError('Slippage must be greater than 0.01');
-      return false;
-    }
-    if (config.jitoFee > 0.01) {
-      setError('Fee can maximum be 0.01');
-      return false;
-    }
+
     setError('');
     return true;
   };
@@ -84,19 +82,14 @@ export function TradeForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const updatedConfig = {
-      ...config,
-      amount: Number(amountInput) || 0,
-    };
+    if (!validateForm()) return;
+    setError('');
+    setMess('');
 
     if (mode) {
-      if (validateForm()) {
-        buy(updatedConfig);
-        setError('');
-        setMess('');
-      }
+      await buy(config);
     } else {
-      const response = await sellToken(updatedConfig);
+      const response = await sellToken(config);
       if (response.error) {
         setError(response.error);
       } else {
@@ -109,15 +102,20 @@ export function TradeForm() {
   const handleMode = () => {
     setMode((prev) => {
       const newMode = !prev;
-      const newAmount = newMode ? 0.00001 : 100;
-      setAmountInput(String(newAmount));
+      modeRef.current = newMode;
 
       setConfig((prevConfig) => ({
         ...prevConfig,
-        amount: newAmount,
+        buyAmount: newMode ? prevConfig.buyAmount : 0,
+        sellAmount: newMode ? 0 : prevConfig.sellAmount,
       }));
+
       return newMode;
     });
+
+    setError('');
+    setTimer('');
+    setMess('');
   };
 
   useEffect(() => {
@@ -128,67 +126,87 @@ export function TradeForm() {
     }
   }, [config.node]);
 
-  useEffect(() => {
-    setAmountInput(String(config.amount));
-  }, []);
-
   return (
     <>
       <form className='styleBox wallet tradeContent' onSubmit={handleSubmit}>
         <div className='trade-settings'>
-          {timer ? (
-            <p style={{ textAlign: 'center' }}>
-              <strong className='timer'>Total Time: {timer}</strong>
-            </p>
-          ) : null}
-          {mess ? (
-            <p style={{ textAlign: 'center' }}>
-              <strong className='success'>Successfull!</strong>
-            </p>
-          ) : null}
+          <div className='msg-content'>
+            {timer ? (
+              <p style={{ textAlign: 'center' }}>
+                <strong className='timer'>Total Time: {timer}ms</strong>
+              </p>
+            ) : null}
+            {mess ? (
+              <p style={{ textAlign: 'center' }}>
+                <strong className='success'>Successfull!</strong>
+              </p>
+            ) : null}
+          </div>
+          <div className='config-container'>
+            <button
+              type='button'
+              className={`float-end btn switch-mode ${mode ? 'buy' : 'sell'}`}
+              onClick={handleMode}
+            >
+              <b>Switch to: {mode ? 'sell' : 'buy'}</b>
+            </button>
+          </div>
         </div>
         <label>Token Contract Address:</label>
-        <button
-          type='button'
-          className={`float-end btn switch-mode ${mode ? 'sell' : 'buy'}`}
-          onClick={handleMode}
-        >
-          Switch to {mode ? 'sell' : 'buy'}
-        </button>
         <input type='text' value={config.mint} onChange={handleMint} placeholder='Enter Token CA' />
-        <label>Amount:</label>
-
-        <input
-          type='text'
-          value={amountInput}
-          onChange={(e) => {
-            setAmountInput(e.target.value);
-            setError('');
-          }}
-          placeholder={mode ? '0.00001 SOL' : '100% (Sell percentage, without %, 50, 100...)'}
+        <label>Amount in {mode ? 'wSOL' : '%'}</label>
+        <div className='input-wrapper'>
+          <input
+            type='text'
+            defaultValue=''
+            max={100}
+            maxLength={100}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              if (modeRef.current) {
+                setConfig((prev) => ({ ...prev, buyAmount: value, sellAmount: 0 }));
+              } else {
+                setConfig((prev) => ({ ...prev, sellAmount: value, buyAmount: 0 }));
+              }
+              setError('');
+            }}
+            placeholder={mode ? `0.0001` : '100% (Sell percentage, 50, 100...)'}
+          />
+          <span className='input-symbol'>{mode ? 'wSOL' : '%'}</span>
+        </div>
+        <Switches
+          curr={config.node}
+          onChange={(checked) => setConfig((prev) => ({ ...prev, node: checked }))}
         />
-
-        <Switches curr={config.node} mode={setConfig} />
-
         <div className='fee-option'>
           <div className='slippage'>
-            <label>Slippage (%):</label>
-            <input
-              type='number'
-              value={config.slippage}
-              onChange={(e) => setConfig((prev) => ({ ...prev, slippage: Number(e.target.value) }))}
-            />
+            <div className='input-wrapper'>
+              <label>Slippage (%):</label>
+              <input
+                type='text'
+                value={config.slippage}
+                onChange={(e) =>
+                  setConfig((prev) => ({ ...prev, slippage: Number(e.target.value) }))
+                }
+              />
+              <span className='input-symbol fee-symbol'>%</span>
+            </div>
           </div>
           <div className='slippage'>
-            <label>Priority fee:</label>
-            <input
-              type='number'
-              value={config.jitoFee}
-              onChange={(e) => setConfig((prev) => ({ ...prev, jitoFee: Number(e.target.value) }))}
-            />
+            <div className='input-wrapper'>
+              <label>Priority fee:</label>
+              <input
+                type='text'
+                value={config.jitoFee}
+                onChange={(e) =>
+                  setConfig((prev) => ({ ...prev, jitoFee: Number(e.target.value) }))
+                }
+              />
+              <span className='input-symbol fee-symbol'>wSOL</span>
+            </div>
           </div>
           <div className='select'>
-            <label>Base fee:</label>
+            <label>Base fee:</label> <small className='fee-view'>{config.fee}</small>
             <select
               value={config.fee}
               onChange={(e) => setConfig((prev) => ({ ...prev, fee: Number(e.target.value) }))}

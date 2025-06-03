@@ -18,9 +18,10 @@ function Wallet() {
 
     setError('');
     console.log(privKey);
-    const { pubKey } = await LoadKey(privKey);
-    localStorage.setItem('pubKey', pubKey);
-    setPubKey(pubKey);
+    const res = await LoadKey(privKey);
+    if (res.error) return setError(res.error);
+    localStorage.setItem('pubKey', res.pubKey);
+    setPubKey(res.pubKey);
     setAuthenticated(true);
     setPrivKey('');
   };

@@ -33,7 +33,8 @@ export function OwnedTokens() {
 
     const sell = await sellToken({
       mint: token.tokenMint,
-      amount: percent,
+      sellAmount: percent,
+      buyAmount: 0,
       node,
       slippage: 25,
       fee: node ? 0.0001 : 0.00001,

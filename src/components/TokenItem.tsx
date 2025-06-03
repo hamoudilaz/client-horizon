@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Switches } from '../components/ui/Switch';
 import { ClipLoader } from 'react-spinners';
-import type { Props, singleMode } from '../utils/constants';
+import type { Props } from '../utils/constants';
 
 export function TokenItem({ token, loadingStates, handleSell }: Props) {
   const [node, setNode] = useState(false);
@@ -10,7 +10,7 @@ export function TokenItem({ token, loadingStates, handleSell }: Props) {
     <li className='tokenList'>
       <div>
         <img src={token.logoURI ? token.logoURI : 'vite.svg'} />
-        <Switches curr={node} mode={setNode as unknown as singleMode} />
+        <Switches curr={node} onChange={setNode} />
       </div>
       <span className='tokenInfo'>{token.tokenMint} </span>
       <span className='tokenInfo'>

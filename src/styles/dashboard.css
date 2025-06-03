@@ -212,6 +212,7 @@ form a:active {
   justify-content: space-between;
   gap: 5px;
   margin-bottom: 20px;
+  flex-direction: column;
 }
 
 /* From Uiverse.io by barisdogansutcu */
@@ -363,4 +364,25 @@ li img {
 .error-msg {
   color: rgb(148, 50, 50);
   margin: auto;
+}
+
+.btn-switch {
+  float: right;
+  border: none;
+  background: none;
+  color: rgb(0, 74, 15);
+  border-radius: 100px;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn-switch:hover {
+  background-color: #0c0c0c;
+}
+
+.btn-switch:active {
+  transform: scale(0.99);
+}
+.fee-view {
+  font-size: 12px;
+  opacity: 0.4;
 }
