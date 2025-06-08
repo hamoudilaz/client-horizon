@@ -5,7 +5,9 @@ import Dashboard from './containers/Dashboard';
 import { Header } from './components/Header';
 
 const App = () => {
-  const { pubKey } = usePubKey();
+  const { pubKey, authenticated } = usePubKey();
+
+  if (authenticated === null) return null;
 
   return (
     <>

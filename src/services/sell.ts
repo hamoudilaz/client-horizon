@@ -10,7 +10,7 @@ export async function sellToken(config: settings) {
     },
     body: JSON.stringify({
       outputMint: config.mint,
-      amount: config.amount,
+      amount: config.sellAmount,
       fee: config.fee,
       jitoFee: config.jitoFee,
       node: config.node,

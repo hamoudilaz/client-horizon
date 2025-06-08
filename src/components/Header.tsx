@@ -2,6 +2,7 @@ import '../styles/Navbar.css';
 import { SlCopyButton } from '@shoelace-style/shoelace/dist/react';
 import { usePubKey } from '../utils/usePubKey';
 import { logout } from '../services/loadKey';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export function Header() {
   const { pubKey, setPubKey, authenticated, setAuthenticated } = usePubKey();
@@ -28,8 +29,8 @@ export function Header() {
               <SlCopyButton value={pubKey ?? undefined} />
             </div>
 
-            <button className='LogoutBtn' onClick={clearStorage}>
-              Logout
+            <button className='logout-btn LogoutBtn' onClick={clearStorage}>
+              <LogoutIcon /> Logout
             </button>
           </>
         )}

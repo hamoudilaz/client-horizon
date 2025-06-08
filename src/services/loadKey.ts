@@ -7,9 +7,9 @@ export async function LoadKey(key: string) {
   });
 
   const pubKey = await request.json();
-
+  console.log(pubKey);
   if (pubKey.error) {
-    throw new Error(pubKey.error);
+    return { error: pubKey.error };
   }
 
   return pubKey;

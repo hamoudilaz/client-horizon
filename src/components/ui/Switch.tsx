@@ -1,8 +1,12 @@
 import Switch from '@mui/material/Switch';
 import Tooltip from '@mui/material/Tooltip';
-import type { Mode } from '../../utils/constants';
+// import type { Mode } from '../../utils/constants';
+interface SwitchesProps {
+  curr: boolean;
+  onChange: (checked: boolean) => void;
+}
 
-export function Switches({ curr, mode }: Mode) {
+export function Switches({ curr, onChange }: SwitchesProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
       <label style={{ fontWeight: 'bold', cursor: 'help', fontSize: '13px' }}>
@@ -26,7 +30,7 @@ export function Switches({ curr, mode }: Mode) {
           <span>
             <Switch
               checked={curr}
-              onChange={(e) => mode((prev) => ({ ...prev, node: e.target.checked }))}
+              onChange={(e) => onChange(e.target.checked)}
               color='success'
               sx={{
                 '& .MuiSwitch-track': {
