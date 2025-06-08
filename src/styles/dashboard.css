@@ -386,3 +386,24 @@ li img {
   font-size: 12px;
   opacity: 0.4;
 }
+
+.msg-sell {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.msg-text {
+  padding: 10px;
+
+  font-weight: 500;
+  color: rgb(0, 136, 255);
+}
+
+.sellMsg {
+  text-decoration: none;
+  width: fit-content;
+}
+.sellMsg:hover {
+  text-decoration: underline;
+}

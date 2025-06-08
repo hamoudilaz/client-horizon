@@ -12,8 +12,7 @@ export function Amount() {
   });
 
   const fetchAmount = async () => {
-    const pubKey = localStorage.getItem('pubKey') || '';
-    const owned = await getAmount(pubKey);
+    const owned = await getAmount();
     if (owned) {
       setAmount(owned);
       wsolRef.current = owned.WSOL;

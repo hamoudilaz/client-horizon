@@ -113,10 +113,6 @@ strong {
   }
 }
 
-.sellMsg {
-  width: fit-content;
-}
-
 .owned-tokens {
   align-self: baseline;
 }
@@ -156,6 +152,8 @@ strong {
 
 .config-container {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   gap: 10px;
 }

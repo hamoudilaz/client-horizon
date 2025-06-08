@@ -142,17 +142,18 @@ export function TradeForm() {
               </p>
             ) : null}
           </div>
-          <div className='config-container'>
-            <button
-              type='button'
-              className={`float-end btn switch-mode ${mode ? 'buy' : 'sell'}`}
-              onClick={handleMode}
-            >
-              <b>Switch to: {mode ? 'sell' : 'buy'}</b>
-            </button>
-          </div>
         </div>
-        <label>Token Contract Address:</label>
+        <div className='config-container'>
+          <label>Token Contract Address:</label>
+          <button
+            type='button'
+            className={`btn switch-mode w-50 ${mode ? 'sell' : 'buy'}`}
+            onClick={handleMode}
+          >
+            <b>Switch to: {mode ? 'sell' : 'buy'}</b>
+          </button>
+        </div>
+
         <input type='text' value={config.mint} onChange={handleMint} placeholder='Enter Token CA' />
         <label>Amount in {mode ? 'wSOL' : '%'}</label>
         <div className='input-wrapper'>

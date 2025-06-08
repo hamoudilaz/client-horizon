@@ -73,9 +73,9 @@ export function OwnedTokens() {
           )}
         </div>
         {mess ? (
-          <div className='mb-3'>
+          <div className='mb-3 msg-sell'>
             <a href={mess} target='_blank' rel='noreferrer' className='sellMsg'>
-              <span className='text'>View on Solscan</span>
+              <span className='text msg-text'>View on Solscan</span>
             </a>
             <strong className='timer'>Total Time: {timer}</strong>
           </div>
