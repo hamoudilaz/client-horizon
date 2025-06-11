@@ -167,15 +167,6 @@ strong {
   width: 100%;
 }
 
-.input-symbol {
-  position: absolute;
-  top: 43%;
-  right: 12px;
-  transform: translateY(-50%);
-  color: #7b7b7b;
-  pointer-events: none;
-}
-
 .fee-symbol {
   position: absolute;
   font-size: 15px;
@@ -184,4 +175,122 @@ strong {
   transform: translateY(-50%);
   color: #7b7b7b;
   pointer-events: none;
+}
+
+.demo-button {
+  position: absolute;
+
+  margin: auto;
+  transform: translateX(-45%);
+
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgb(196, 196, 196);
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-width: 140px;
+  box-shadow: 0 0px 3px rgba(89, 0, 255, 1);
+  padding: 14px 28px; /* Moved padding here */
+}
+
+.demo-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.demo-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.demo-button:hover::before {
+  left: 100%;
+}
+
+.demo-button:active {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.demo-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Remove the nested a styling since we're no longer nesting */
+
+@media (max-width: 768px) {
+  .demo-button {
+    padding: 12px 24px;
+    font-size: 15px;
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .demo-button {
+    transform: translateX(0);
+    padding: 10px 20px;
+    font-size: 14px;
+    min-width: 100px;
+  }
+}
+
+.holding-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+
+  /* Modern glassmorphism background */
+  background: rgba(40, 40, 60, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* Subtle gradient border */
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 16px;
+
+  /* Modern shadow with purple tint */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(124, 58, 237, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* Smooth transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.holding-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(124, 58, 237, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.display-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+.SOL-price {
+  font-size: 20px !important;
+  font-weight: bolder;
 }

@@ -1,36 +1,33 @@
-import { getAmount } from '../services/getAmount';
-import { useState, useEffect } from 'react';
-import { refreshRef, type ownAmount, wsolRef } from '../utils/constants';
-// import { SlCopyButton } from '@shoelace-style/shoelace/dist/react';
+import { useEffect, useState } from 'react';
+import { getSessionAmount } from '../../services/demo/api';
+
+type AmountData = {
+  initialAmount: number;
+  currentUsd: number;
+  SOL: number;
+  SOLPRICE?: number;
+};
 
 export function Amount() {
-  const [amount, setAmount] = useState<ownAmount>({
-    usdValue: 0,
-    SOL: 0,
-    WSOL: 0,
-    SOLPRICE: 0,
-  });
-
-  const fetchAmount = async () => {
-    const owned = await getAmount();
-    if (owned) {
-      setAmount(owned);
-      wsolRef.current = owned.WSOL;
-    }
-  };
-
-  console.log(amount);
+  const [amount, setAmount] = useState<AmountData>();
 
   useEffect(() => {
-    refreshRef.current = fetchAmount;
-    fetchAmount();
+    const update = async () => {
+      const data = await getSessionAmount();
+      if (data.valid) {
+        setAmount(data.amount); // not setAmount(data)
+        console.log(data.amount);
+      }
+    };
+    update();
   }, []);
+
   return (
     <>
       <div className='display-container'>
         <div className='info-box'>
           <span className='label blue SOL-price'>Current SOL price:</span>
-          <span className='value blue'>${amount.SOLPRICE}</span>{' '}
+          <span className='value blue'>${amount?.SOLPRICE}</span>
           <span>
             <a
               className='view-SOL'
@@ -48,15 +45,15 @@ export function Amount() {
           <div className='amount-container'>
             <div className='info-box'>
               <span className='label blue'>Value in USD:</span>
-              <span className='value blue'>${amount.usdValue}</span>
+              <span className='value blue'>${amount?.currentUsd}</span>
             </div>
             <div className='info-box'>
               <span className='label green'>SOL:</span>
-              <span className='value green'>{amount.SOL} SOL</span>
+              <span className='value green'>{amount?.SOL} SOL</span>
             </div>
             <div className='info-box'>
               <span className='label yellow'>wSOL:</span>
-              <span className='value yellow'>{amount.WSOL} WSOL</span>
+              <span className='value yellow'>{amount?.SOL} WSOL</span>
             </div>
           </div>
         </div>

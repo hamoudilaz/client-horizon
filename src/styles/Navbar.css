@@ -1,5 +1,11 @@
 .navbar {
   padding: 20px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .horizon-text:hover {
@@ -12,6 +18,7 @@
 }
 
 .horizon-text {
+  user-select: none;
   text-align: center;
 }
 
@@ -19,12 +26,6 @@
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0px 0px 5px rgb(69, 0, 149), inset 0px 0px 5px rgb(69, 0, 149);
-}
-
-.displayKey {
-  margin: 0px;
-  color: rgb(158, 158, 158);
-  font-size: clamp(0.7rem, 2vw, 0.6rem);
 }
 
 .copyBox {
@@ -49,6 +50,7 @@
   color: rgb(188, 188, 188);
   white-space: nowrap;
 }
+
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -56,17 +58,32 @@
   width: 70%;
 }
 
-.LogoutBtn {
-  background: transparent;
+.label {
+  font-size: clamp(0, 5rem, 1rem, 2rem);
+  font-weight: 400;
+  margin-right: 5px;
+}
 
+.displayKey {
+  margin: 0px;
+  color: rgb(158, 158, 158);
+  font-size: clamp(0.7rem, 2vw, 0.6rem);
+}
+
+.LogoutBtn {
+  user-select: none;
+  background: transparent;
   color: white;
   border-radius: 5px;
-
   transition: all 0.1s ease-in-out;
   border: 1px solid transparent;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
+
 .LogoutBtn:hover {
-  padding: 6px;
   border-color: #c2c2c2;
 }
 
@@ -91,12 +108,6 @@
   flex-wrap: nowrap;
 }
 
-.label {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-right: 5px;
-}
-
 .green {
   color: #c6c6c6;
 } /* SOL */
@@ -108,19 +119,44 @@
 } /* USD */
 
 @media (max-width: 650px) {
-  .amount-container * {
-    font-size: 12px;
+  .navbar {
+    align-items: flex-start;
+    min-height: 60px;
   }
+
   .logoBox {
     margin: auto;
   }
+
   .copyBox {
-    gap: 2px;
+    gap: 5px;
     padding: 5px;
-    border: none;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .amount-container {
+    flex-direction: column !important;
   }
 }
 
 .login {
-  margin: auto;
+  /* margin: auto; */
+}
+
+.holding-label {
+  font-weight: 700;
+}
+
+.view-SOL {
+  text-decoration: none;
+  margin-left: 10px;
 }

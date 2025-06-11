@@ -3,9 +3,14 @@ import { SlCopyButton } from '@shoelace-style/shoelace/dist/react';
 import { usePubKey } from '../utils/usePubKey';
 import { logout } from '../services/loadKey';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Link, useLocation } from 'react-router-dom';
 
 export function Header() {
   const { pubKey, setPubKey, authenticated, setAuthenticated } = usePubKey();
+
+  const location = useLocation();
+  const isDemoPage = location.pathname === '/demo';
+  const isStartPage = location.pathname === '/start';
 
   const clearStorage = async () => {
     await logout();
@@ -20,6 +25,17 @@ export function Header() {
         <div className={`logoBox ${!authenticated && 'login'}`}>
           <h1 className='horizon-text'>HORIZON</h1>
         </div>
+        {isDemoPage ? (
+          <Link className='demo-button' to='/'>
+            Back to Real Trading
+          </Link>
+        ) : (
+          isStartPage && (
+            <Link className='demo-button' to='/demo'>
+              Demo (Simulated Trades)
+            </Link>
+          )
+        )}
 
         {authenticated && (
           <>
@@ -29,9 +45,11 @@ export function Header() {
               <SlCopyButton value={pubKey ?? undefined} />
             </div>
 
-            <button className='logout-btn LogoutBtn' onClick={clearStorage}>
-              <LogoutIcon /> Logout
-            </button>
+            <div className='logout-container'>
+              <button className='logout-btn LogoutBtn' onClick={clearStorage}>
+                <LogoutIcon /> Logout
+              </button>
+            </div>
           </>
         )}
       </nav>

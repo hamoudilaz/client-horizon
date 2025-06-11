@@ -1,21 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
-import { executeSwap } from '../services/buy.js';
+import { executeSwap } from '../../services/demo/buy.js';
 import { ClipLoader } from 'react-spinners';
-import { sellToken } from '../services/sell.js';
-import { usePubKey } from '../utils/usePubKey.ts';
-import { Switches } from './ui/Switch.tsx';
-import { rateLimit } from '../services/buy.ts';
-import { wsolRef, type settings, type InputEvent } from '../utils/constants.ts';
-import validateInputs from '../helpers/validateForm.tsx';
+import { sellToken } from '../../services/demo/sell.js';
+import { Switches } from '../ui/Switch.tsx';
+import { type settings, type InputEvent } from '../../utils/constants.ts';
+import validateInputs from '../../helpers/validateForm.tsx';
 
-export function TradeForm() {
+export function DemoTradeForm() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [mess, setMess] = useState('');
   const [timer, setTimer] = useState('');
   const [mode, setMode] = useState(true);
 
-  const [limit, setlimit] = useState(false);
   const [config, setConfig] = useState<settings>({
     mint: '',
     buyAmount: 0,
@@ -26,7 +23,6 @@ export function TradeForm() {
     node: false,
   });
 
-  const { setPubKey } = usePubKey();
   const modeRef = useRef(mode);
 
   async function buy(cfg: settings) {
@@ -34,13 +30,8 @@ export function TradeForm() {
     try {
       const response = await executeSwap(cfg);
       console.log(response);
-      if (response?.limit) {
-        rateLimit(setlimit, setError, response.retryAfter || 20);
-      }
 
       if (response.error) {
-        if (response.error.startsWith('Internal Server Error: pubKey is undefined'))
-          return setPubKey(null);
         console.log(response.error);
         setError(response.error);
       } else {
@@ -56,7 +47,7 @@ export function TradeForm() {
   }
 
   const validateForm = () => {
-    const wsol = wsolRef.current;
+    const wsol: number = 0.2;
     console.log(config);
     console.log('VALIDATING MODE:', mode);
 
@@ -72,7 +63,7 @@ export function TradeForm() {
   };
 
   const handleMint = (e: InputEvent) => {
-    const CA = e.target.value;
+    const CA: string = e.target.value;
     setMess('');
     setTimer('');
     setError('');
@@ -207,9 +198,7 @@ export function TradeForm() {
             </div>
           </div>
           <div className='select'>
-            <div className='fee-div'>
-              <label>Base fee:</label> <small className='fee-view'>{config.fee}</small>
-            </div>
+            <label>Base fee:</label> <small className='fee-view'>{config.fee}</small>
             <select
               value={config.fee}
               onChange={(e) => setConfig((prev) => ({ ...prev, fee: Number(e.target.value) }))}
@@ -220,7 +209,7 @@ export function TradeForm() {
             </select>
           </div>
         </div>
-        <button className='buy-btn bttn buybtn' type='submit' disabled={loading || limit}>
+        <button className='buy-btn bttn buybtn' type='submit' disabled={loading}>
           {loading ? (
             <span className='text'>
               <ClipLoader size={20} color='#fff' />
