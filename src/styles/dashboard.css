@@ -7,6 +7,7 @@ body {
 }
 .main-container {
   display: flex;
+  gap: 30px;
   flex-direction: column;
   justify-content: center;
   height: 100%;
@@ -22,6 +23,7 @@ form h2 {
 
 form label {
   font-size: 0.9rem;
+  user-select: none;
   color: #aaa;
 }
 
@@ -38,6 +40,7 @@ form select {
   border-radius: 6px;
   transition: 0.3s;
   box-sizing: border-box; /* ✅ Prevents shrinking */
+  user-select: none;
 }
 
 form select {
@@ -209,6 +212,7 @@ form a:active {
 
 .trade-settings {
   display: flex;
+  user-select: none;
   justify-content: space-between;
   gap: 5px;
   margin-bottom: 20px;
@@ -335,7 +339,7 @@ li img {
 }
 
 .switch-mode.sell {
-  color: rgb(144, 4, 4);
+  color: rgba(104, 5, 5, 0.797);
 }
 
 .switch-mode.buy {
@@ -352,6 +356,7 @@ li img {
 }
 
 .ownedHeader {
+  user-select: none;
   margin: 0px;
 }
 
@@ -385,6 +390,7 @@ li img {
 .fee-view {
   font-size: 12px;
   opacity: 0.4;
+  user-select: none;
 }
 
 .msg-sell {
@@ -406,4 +412,19 @@ li img {
 }
 .sellMsg:hover {
   text-decoration: underline;
+}
+
+.input-symbol {
+  position: absolute;
+  top: 43%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #7b7b7b;
+  pointer-events: none;
+  user-select: none;
+}
+.fee-div {
+  align-items: baseline;
+  white-space: nowrap;
+  gap: 6px;
 }

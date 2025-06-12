@@ -1,21 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
-import { executeSwap } from '../services/buy.js';
+import { executeSwap } from '../../services/demo/buy.js';
 import { ClipLoader } from 'react-spinners';
-import { sellToken } from '../services/sell.js';
-import { usePubKey } from '../utils/usePubKey.ts';
-import { Switches } from './ui/Switch.tsx';
-import { rateLimit } from '../services/buy.ts';
-import { wsolRef, type settings, type InputEvent } from '../utils/constants.ts';
-import validateInputs from '../helpers/validateForm.tsx';
+import { sellToken } from '../../services/demo/sell.js';
+import { Switches } from '../ui/Switch.tsx';
+import { type settings, type InputEvent } from '../../utils/constants.ts';
+import validateInput from '../../helpers/validateForm.tsx';
+import { refreshRef, wsolRef } from '../../utils/constants';
 
-export function TradeForm() {
+export function DemoTradeForm() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [mess, setMess] = useState('');
   const [timer, setTimer] = useState('');
   const [mode, setMode] = useState(true);
 
-  const [limit, setlimit] = useState(false);
   const [config, setConfig] = useState<settings>({
     mint: '',
     buyAmount: 0,
@@ -26,41 +24,35 @@ export function TradeForm() {
     node: false,
   });
 
-  const { setPubKey } = usePubKey();
   const modeRef = useRef(mode);
 
-  async function buy(cfg: settings) {
-    setLoading(true);
-    try {
-      const response = await executeSwap(cfg);
-      console.log(response);
-      if (response?.limit) {
-        rateLimit(setlimit, setError, response.retryAfter || 20);
-      }
+  // async function buy(cfg: settings) {
+  //   setLoading(true);
+  //   try {
+  //     const response = await executeSwap(cfg);
+  //     console.log(response);
 
-      if (response.error) {
-        if (response.error.startsWith('Internal Server Error: pubKey is undefined'))
-          return setPubKey(null);
-        console.log(response.error);
-        setError(response.error);
-      } else {
-        setTimer(response.end || '');
-        setMess(response.message || '');
-      }
-    } catch (error: unknown) {
-      setError((error as Error).message);
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  //     if (response.error) {
+  //       console.log(response.error);
+  //       setError(response.error);
+  //     } else {
+  //       setTimer(response.end || '');
+  //       setMess(response.message || '');
+  //     }
+  //   } catch (error: unknown) {
+  //     setError((error as Error).message);
+  //     console.error(error);
+  //   } finally {
+  //     refreshRef.current?.();
+
+  //     setLoading(false);
+  //   }
+  // }
 
   const validateForm = () => {
     const wsol = wsolRef.current;
-    console.log(config);
-    console.log('VALIDATING MODE:', mode);
 
-    const result = validateInputs(config, wsol, mode);
+    const result = validateInput(config, wsol, mode, true);
 
     if (result !== true) {
       setError(result);
@@ -72,7 +64,7 @@ export function TradeForm() {
   };
 
   const handleMint = (e: InputEvent) => {
-    const CA = e.target.value;
+    const CA: string = e.target.value;
     setMess('');
     setTimer('');
     setError('');
@@ -85,17 +77,32 @@ export function TradeForm() {
     if (!validateForm()) return;
     setError('');
     setMess('');
+    setLoading(true);
 
-    if (mode) {
-      await buy(config);
-    } else {
-      const response = await sellToken(config);
-      if (response.error) {
-        setError(response.error);
+    try {
+      if (mode) {
+        const response = await executeSwap(config);
+        if (response.error) {
+          console.log(response.error);
+          setError(response.error);
+        } else {
+          setTimer(response.end || '');
+          setMess(response.message || '');
+        }
       } else {
-        setTimer(response.end);
-        setMess(response.message);
+        const response = await sellToken(config);
+        if (response.error) {
+          setError(response.error);
+        } else {
+          setTimer(response.end);
+          setMess(response.message);
+        }
       }
+    } catch (error: unknown) {
+      setError((error as Error).message);
+    } finally {
+      refreshRef.current?.();
+      setLoading(false);
     }
   };
 
@@ -198,7 +205,8 @@ export function TradeForm() {
               <label>Priority fee:</label>
               <input
                 type='text'
-                value={config.jitoFee}
+                defaultValue=''
+                placeholder='0.01'
                 onChange={(e) =>
                   setConfig((prev) => ({ ...prev, jitoFee: Number(e.target.value) }))
                 }
@@ -220,7 +228,7 @@ export function TradeForm() {
             </select>
           </div>
         </div>
-        <button className='buy-btn bttn buybtn' type='submit' disabled={loading || limit}>
+        <button className='buy-btn bttn buybtn' type='submit' disabled={loading}>
           {loading ? (
             <span className='text'>
               <ClipLoader size={20} color='#fff' />

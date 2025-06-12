@@ -2,7 +2,8 @@ import type { settings } from '../utils/constants';
 export default function validateInput(
   config: settings,
   wsol: number,
-  mode: boolean
+  mode: boolean,
+  demo: boolean
 ): true | string {
   console.log('ATT VALIDATEINPUT:', config, mode);
   if (config.slippage <= 0.01 || config.slippage > 100) {
@@ -16,14 +17,23 @@ export default function validateInput(
     return 'Invalid contract address';
   }
 
-  if (mode) {
+  if (config.buyAmount && demo) {
+    if (config.buyAmount <= 0 || config.buyAmount >= 5000) {
+      return 'Amount must be between 0 and 5000';
+    }
+    if (config.buyAmount >= wsol) {
+      return `You dont have enough wSOL: buy amount: ${config.buyAmount}, owned: ${wsol}`;
+    }
+  }
+
+  if (mode && !demo) {
     if (config.buyAmount <= 0 || config.buyAmount >= 5) {
       return 'Amount must be between 0 and 5';
     }
     if (config.buyAmount >= wsol) {
       return `You dont have enough wSOL: buy amount: ${config.buyAmount}, owned: ${wsol}`;
     }
-  } else {
+  } else if (!demo) {
     console.log('AT SELL VALIDATE');
     if (
       !Number.isInteger(config.sellAmount ?? -1) ||
