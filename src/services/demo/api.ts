@@ -10,10 +10,17 @@ export const fetchTokens = async (setTokens: TokenSetter): Promise<void> => {
 
     console.log(data);
 
-    if (!data) return;
-    setTokens(data);
+    if (Array.isArray(data)) {
+      setTokens(data);
+    } else {
+      // If it's not an array, set it to an empty array to prevent the .map error
+      // and log the error from the API.
+      console.error('API did not return an array of tokens:', data);
+      setTokens([]);
+    }
   } catch (error) {
     console.error('Failed to fetch tokens:', error);
+    setTokens([]);
   }
 };
 
