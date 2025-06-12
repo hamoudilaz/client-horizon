@@ -60,7 +60,7 @@ export function TradeForm() {
     console.log(config);
     console.log('VALIDATING MODE:', mode);
 
-    const result = validateInputs(config, wsol, mode);
+    const result = validateInputs(config, wsol, mode, false);
 
     if (result !== true) {
       setError(result);
