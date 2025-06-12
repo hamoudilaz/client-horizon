@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getSessionAmount } from '../../services/demo/api';
+import { refreshRef, wsolRef } from '../../utils/constants';
 
 type AmountData = {
   initialAmount: number;
@@ -11,15 +12,19 @@ type AmountData = {
 export function Amount() {
   const [amount, setAmount] = useState<AmountData>();
 
+  const fetchAmount = async () => {
+    const data = await getSessionAmount();
+    if (data.valid) {
+      setAmount(data.amount);
+      wsolRef.current = data.amount.SOL;
+
+      console.log(data.amount);
+    }
+  };
+
   useEffect(() => {
-    const update = async () => {
-      const data = await getSessionAmount();
-      if (data.valid) {
-        setAmount(data.amount); // not setAmount(data)
-        console.log(data.amount);
-      }
-    };
-    update();
+    refreshRef.current = fetchAmount;
+    fetchAmount();
   }, []);
 
   return (

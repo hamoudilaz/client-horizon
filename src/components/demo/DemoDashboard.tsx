@@ -4,7 +4,8 @@ import { ClipLoader } from 'react-spinners';
 import { sellToken } from '../../services/demo/sell.js';
 import { Switches } from '../ui/Switch.tsx';
 import { type settings, type InputEvent } from '../../utils/constants.ts';
-import validateInputs from '../../helpers/validateForm.tsx';
+import validateInput from '../../helpers/validateForm.tsx';
+import { refreshRef, wsolRef } from '../../utils/constants';
 
 export function DemoTradeForm() {
   const [error, setError] = useState('');
@@ -25,33 +26,33 @@ export function DemoTradeForm() {
 
   const modeRef = useRef(mode);
 
-  async function buy(cfg: settings) {
-    setLoading(true);
-    try {
-      const response = await executeSwap(cfg);
-      console.log(response);
+  // async function buy(cfg: settings) {
+  //   setLoading(true);
+  //   try {
+  //     const response = await executeSwap(cfg);
+  //     console.log(response);
 
-      if (response.error) {
-        console.log(response.error);
-        setError(response.error);
-      } else {
-        setTimer(response.end || '');
-        setMess(response.message || '');
-      }
-    } catch (error: unknown) {
-      setError((error as Error).message);
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  //     if (response.error) {
+  //       console.log(response.error);
+  //       setError(response.error);
+  //     } else {
+  //       setTimer(response.end || '');
+  //       setMess(response.message || '');
+  //     }
+  //   } catch (error: unknown) {
+  //     setError((error as Error).message);
+  //     console.error(error);
+  //   } finally {
+  //     refreshRef.current?.();
+
+  //     setLoading(false);
+  //   }
+  // }
 
   const validateForm = () => {
-    const wsol: number = 0.2;
-    console.log(config);
-    console.log('VALIDATING MODE:', mode);
+    const wsol = wsolRef.current;
 
-    const result = validateInputs(config, wsol, mode);
+    const result = validateInput(config, wsol, mode, true);
 
     if (result !== true) {
       setError(result);
@@ -76,17 +77,32 @@ export function DemoTradeForm() {
     if (!validateForm()) return;
     setError('');
     setMess('');
+    setLoading(true);
 
-    if (mode) {
-      await buy(config);
-    } else {
-      const response = await sellToken(config);
-      if (response.error) {
-        setError(response.error);
+    try {
+      if (mode) {
+        const response = await executeSwap(config);
+        if (response.error) {
+          console.log(response.error);
+          setError(response.error);
+        } else {
+          setTimer(response.end || '');
+          setMess(response.message || '');
+        }
       } else {
-        setTimer(response.end);
-        setMess(response.message);
+        const response = await sellToken(config);
+        if (response.error) {
+          setError(response.error);
+        } else {
+          setTimer(response.end);
+          setMess(response.message);
+        }
       }
+    } catch (error: unknown) {
+      setError((error as Error).message);
+    } finally {
+      refreshRef.current?.();
+      setLoading(false);
     }
   };
 
@@ -189,7 +205,8 @@ export function DemoTradeForm() {
               <label>Priority fee:</label>
               <input
                 type='text'
-                value={config.jitoFee}
+                defaultValue=''
+                placeholder='0.01'
                 onChange={(e) =>
                   setConfig((prev) => ({ ...prev, jitoFee: Number(e.target.value) }))
                 }
@@ -198,7 +215,9 @@ export function DemoTradeForm() {
             </div>
           </div>
           <div className='select'>
-            <label>Base fee:</label> <small className='fee-view'>{config.fee}</small>
+            <div className='fee-div'>
+              <label>Base fee:</label> <small className='fee-view'>{config.fee}</small>
+            </div>
             <select
               value={config.fee}
               onChange={(e) => setConfig((prev) => ({ ...prev, fee: Number(e.target.value) }))}

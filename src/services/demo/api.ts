@@ -2,7 +2,10 @@ import type { Token, TokenSetter, stateChangeBool } from '../../utils/constants'
 
 export const fetchTokens = async (setTokens: TokenSetter): Promise<void> => {
   try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/demo/tokens`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/demo/tokens`, {
+      method: 'GET',
+      credentials: 'include',
+    });
     const data: Token[] = await res.json();
 
     console.log(data);

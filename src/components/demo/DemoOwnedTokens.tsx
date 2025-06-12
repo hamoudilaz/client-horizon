@@ -7,6 +7,7 @@ import { fetchTokens, mockUpdateBalance } from '../../services/demo/api';
 import type { Token } from '../../utils/constants';
 import { handleDemoMessage } from '../../services/demo/handleWss';
 import { TokenItem } from '../TokenItem';
+import { refreshRef } from '../../utils/constants';
 
 export function OwnedTokens() {
   const [tokens, setTokens] = useState<Token[]>([]);
@@ -46,11 +47,11 @@ export function OwnedTokens() {
     } else {
       setMess(sell.message);
       setTimer(sell.end);
+      refreshRef.current?.();
     }
 
     setLoadingStates((prev) => ({ ...prev, [key]: false }));
   };
-  console.log(tokens);
   return (
     <>
       <div className='owned-tokens'>

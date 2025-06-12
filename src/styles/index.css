@@ -169,7 +169,7 @@ strong {
 
 .fee-symbol {
   position: absolute;
-  font-size: 15px;
+  font-size: clamp(10px, 2vw, 18px);
   top: 58%;
   right: 12px;
   transform: translateY(-50%);
