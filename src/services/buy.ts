@@ -47,6 +47,7 @@ export const rateLimit: limitArgs = (setLimit, setError, retrySeconds) => {
       clearInterval(interval);
       setLimit(false);
       setError('');
+      console.log('e');
     }
   }, 1000);
 };

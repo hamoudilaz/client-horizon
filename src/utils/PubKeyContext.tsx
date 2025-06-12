@@ -32,8 +32,9 @@ export const PubKeyProvider = ({ children }: { children: ReactNode }) => {
         const data = await res.json();
         setPubKey(data.pubKey);
         setAuthenticated(true);
-      } catch {
-        // silent fail
+      } catch (err) {
+        console.error('Session check failed:', err);
+        setAuthenticated(false);
       }
     };
 
