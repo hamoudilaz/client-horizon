@@ -37,7 +37,7 @@ export function Header() {
           )
         )}
 
-        {authenticated && (
+        {authenticated && !isDemoPage && (
           <>
             <div className='copyBox'>
               <label>Public Key:</label>
