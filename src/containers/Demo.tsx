@@ -5,8 +5,15 @@ import { SlCopyButton } from '@shoelace-style/shoelace/dist/react';
 import Wallet from '../services/demo/DemoSession';
 import { useState, useEffect } from 'react';
 import { checkDemo } from '../services/demo/api';
+import { resetDemo } from '../services/loadKey';
+import { usePubKey } from '../utils/usePubKey';
+import { useNavigate } from 'react-router-dom';
+
 export default function Demo() {
   const [demo, setDemo] = useState(0);
+
+  const { setAuthenticated } = usePubKey();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const validate = async () => {
@@ -23,8 +30,13 @@ export default function Demo() {
     validate();
   }, []);
 
+  const clearStorage = async () => {
+    await resetDemo();
+    setAuthenticated(false);
+    navigate('/start');
+  };
+
   if (!demo) return <Wallet demo={setDemo} />;
-  console.log(demo);
 
   return (
     <>
@@ -37,6 +49,12 @@ export default function Demo() {
         </div>
         <div className='trade-form'>
           <div>
+            <button
+              className='logout-btn LogoutBtn float-end demo-button reset-demo'
+              onClick={clearStorage}
+            >
+              RESET DEMO
+            </button>
             <h2 className='trade-settings'>Trade Settings</h2>
             <DemoTradeForm />
           </div>

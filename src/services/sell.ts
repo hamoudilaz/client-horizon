@@ -2,7 +2,7 @@ import type { settings } from '../utils/constants';
 
 export async function sellToken(config: settings) {
   console.log(config);
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/sell`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/sell`, {
     method: 'POST',
     credentials: 'include',
     headers: {

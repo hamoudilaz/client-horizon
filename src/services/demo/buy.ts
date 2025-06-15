@@ -3,7 +3,7 @@ import type { settings, SwapResponse } from '../../utils/constants';
 export async function executeSwap(params: settings): Promise<SwapResponse> {
   console.log(params);
   try {
-    const sendReq = await fetch(`${import.meta.env.VITE_API_URL}/demo/buy`, {
+    const sendReq = await fetch(`${import.meta.env.VITE_API_URL}/api/demo/buy`, {
       method: 'POST',
       credentials: 'include',
       headers: {

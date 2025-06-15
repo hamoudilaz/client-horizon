@@ -211,6 +211,7 @@ export function DemoTradeForm() {
                   setConfig((prev) => ({ ...prev, jitoFee: Number(e.target.value) }))
                 }
               />
+
               <span className='input-symbol fee-symbol'>wSOL</span>
             </div>
           </div>
