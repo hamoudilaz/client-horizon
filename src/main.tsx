@@ -4,7 +4,6 @@ import { PubKeyProvider } from './utils/PubKeyContext.jsx';
 import './styles/dashboard.css';
 import './styles/index.css';
 import './styles/Navbar.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App.tsx';
 

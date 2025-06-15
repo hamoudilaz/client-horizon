@@ -5,14 +5,15 @@ body {
   color: white;
   background-color: #0d0c11 !important;
 }
+
 .main-container {
   display: flex;
   gap: 30px;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  margin: 20px;
   align-items: center;
+  flex-grow: 1;
+  padding: 20px;
+  padding-bottom: 100px;
 }
 
 form h2 {

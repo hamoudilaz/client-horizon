@@ -36,6 +36,11 @@ strong {
   color: rgb(206, 206, 206);
 }
 
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* This ensures the wrapper is at least as tall as the screen */
+}
 .bttn:disabled {
   background-color: #cccccc;
   color: #666666;
@@ -176,7 +181,9 @@ strong {
   color: #7b7b7b;
   pointer-events: none;
 }
-
+.reset-demo {
+  transform: translateX(0%) !important;
+}
 .demo-button {
   position: absolute;
 

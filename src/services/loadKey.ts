@@ -25,3 +25,10 @@ export async function logout() {
     credentials: 'include',
   });
 }
+
+export async function resetDemo() {
+  await fetch(`${import.meta.env.VITE_API_URL}/api/demo/reset`, {
+    method: 'POST',
+    credentials: 'include',
+  });
+}
