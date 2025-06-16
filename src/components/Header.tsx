@@ -4,6 +4,7 @@ import { usePubKey } from '../utils/usePubKey';
 import { logout } from '../services/loadKey';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useLocation } from 'react-router-dom';
+import CopyContainer from './ui/Copy';
 
 export function Header() {
   const { pubKey, setPubKey, authenticated, setAuthenticated, demo } = usePubKey();
@@ -26,16 +27,7 @@ export function Header() {
           <h1 className='horizon-text'>HORIZON</h1>
         </div>
 
-        {isDemoPage && demo && (
-          <div className='copyBox mintBox'>
-            <label>Test token:</label>
-            <h2 className='displayKey'> (RNDR Contract Address)</h2>
-            <SlCopyButton
-              value='rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof'
-              style={{ alignSelf: 'center' }}
-            />
-          </div>
-        )}
+        {isDemoPage && demo && <CopyContainer />}
         {isDemoPage ? (
           <Link className='demo-button' to='/'>
             Back to Real Trading

@@ -152,19 +152,20 @@
 }
 
 .settings-buttons {
-  margin: 15px 0px 20px 0px;
   display: flex;
-
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: clamp(6px, 2vw, 12px);
   justify-content: space-evenly;
+  margin-bottom: 20px;
 }
 
 .settings-buttons button {
+  white-space: nowrap;
+  flex: 1 1 auto;
   background-color: #1e1d24;
   font-weight: 500;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgb(211, 211, 211);
-  width: 100%;
   border: 1px solid #444;
   padding: 6px 12px;
   border-radius: 6px;

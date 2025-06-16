@@ -147,7 +147,13 @@ strong {
 }
 
 .switch-mode.sell {
-  color: rgba(104, 5, 5, 0.797);
+  font-weight: 500;
+
+  background: linear-gradient(350deg, #6f00e6 30%, #0051ff 100%) !important;
+  background-size: 100% 100%;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !;
 }
 
 .switch-mode.buy {
@@ -187,16 +193,14 @@ strong {
 
 .fee-symbol {
   position: absolute;
-  font-size: clamp(10px, 2vw, 15px);
+  font-size: clamp(6px, 2vw, 15px);
   top: 58%;
   right: 12px;
   transform: translateY(-50%);
   color: #7b7b7b;
   pointer-events: none;
 }
-.reset-demo {
-  transform: translateX(0%) !important;
-}
+
 .demo-button {
   background: rgba(0, 0, 0, 0.1);
   display: flex;
@@ -408,15 +412,21 @@ h2.trade-settings {
   position: relative;
   padding-top: 75px;
 }
-
 .reset-demo {
   position: absolute;
   top: 0;
   right: 0;
+  letter-spacing: 0.5px;
+  transform: scaleY(1.1); /* actual vertical stretch */
+
   width: 100%;
-  color: #67060685 !important;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bolder;
   left: auto;
-  transform: none !important;
+
+  background: linear-gradient(350deg, #6f00e6 30%, #0051ff 100%) !important;
+  background-size: 100% 100%;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !;
 }

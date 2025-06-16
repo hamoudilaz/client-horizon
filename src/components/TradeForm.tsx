@@ -195,10 +195,17 @@ export function TradeForm() {
             <b>Switch to: {mode ? 'sell' : 'buy'}</b>
           </button>
         </div>
-        <input type='text' value={config.mint} onChange={handleMint} placeholder='Enter Token CA' />
+        <input
+          className='config-input'
+          type='text'
+          value={config.mint}
+          onChange={handleMint}
+          placeholder='Enter Token CA'
+        />
         <label>Amount in {mode ? 'SOL' : '%'}</label>
         <div className='input-wrapper'>
           <input
+            className='config-input'
             type='text'
             defaultValue={(mode && config.buyAmount) || ''}
             max={100}
@@ -226,6 +233,7 @@ export function TradeForm() {
             <div className='input-wrapper'>
               <label>Slippage (%):</label>
               <input
+                className='config-input'
                 type='text'
                 value={config.slippage}
                 onChange={(e) =>
@@ -240,6 +248,7 @@ export function TradeForm() {
               <label>Priority fee:</label>
 
               <input
+                className='config-input'
                 type='text'
                 defaultValue={(mode && config.jitoFee) || ''}
                 placeholder='0.001'
@@ -256,6 +265,7 @@ export function TradeForm() {
               <label>Base fee:</label> <small className='fee-view'>{config.fee}</small>
             </div>
             <select
+              className='config-input'
               value={config.fee}
               onChange={(e) => setConfig((prev) => ({ ...prev, fee: Number(e.target.value) }))}
             >
