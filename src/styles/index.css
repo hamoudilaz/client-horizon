@@ -75,6 +75,10 @@ strong {
 .dashboard {
   animation: fadeIn 0.5s ease-in-out;
 }
+.owned-tokens {
+  position: relative;
+  padding-top: 30px;
+}
 
 .dashboard {
   display: flex;
@@ -174,7 +178,7 @@ strong {
 
 .fee-symbol {
   position: absolute;
-  font-size: clamp(10px, 2vw, 18px);
+  font-size: clamp(10px, 2vw, 15px);
   top: 58%;
   right: 12px;
   transform: translateY(-50%);
@@ -185,12 +189,9 @@ strong {
   transform: translateX(0%) !important;
 }
 .demo-button {
-  position: absolute;
-
-  margin: auto;
-  transform: translateX(-45%);
-
   background: rgba(0, 0, 0, 0.1);
+  display: flex;
+
   border: none;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -252,11 +253,17 @@ strong {
 }
 
 @media (max-width: 480px) {
+  .display-container {
+    margin-top: 50px !important;
+  }
   .demo-button {
     transform: translateX(0);
-    padding: 10px 20px;
-    font-size: 14px;
+    font-size: clamp(1rem, 2vw, 1.5rem);
     min-width: 100px;
+  }
+
+  .horizon-text {
+    font-size: clamp(1.7rem, 2vw, 1.5rem);
   }
 }
 
@@ -295,9 +302,109 @@ strong {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  gap: 10px;
+  margin-top: 30px;
 }
 .SOL-price {
-  font-size: 20px !important;
+  font-weight: 500 !important;
+  font-size: clamp(0.7rem, 2.5vw, 1.5rem); /* Scales with viewport and container */
   font-weight: bolder;
+  display: inline-block;
+  margin: 0px;
+}
+
+.sol-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px !important;
+  margin: 0px !important;
+  width: 100%;
+}
+
+.sol-number {
+  font-size: clamp(0.7rem, 2vw, 1.1rem); /* Scales with viewport and container */
+}
+
+.view-SOL {
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+  font-size: clamp(0.7rem, 2vw, 1.1rem); /* Scales with viewport and container */
+}
+
+.placeholder {
+  display: inline-block;
+  width: 80px;
+  height: 1.2em;
+  background-color: #ddd;
+  border-radius: 4px;
+  animation: pulse 1.5s ease-in-out infinite;
+  vertical-align: middle;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+form.styleBox {
+  position: relative;
+
+  padding-top: 30px;
+}
+
+h2.trade-settings {
+  position: absolute;
+  display: flex;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  background-color: #0d0c11;
+  color: rgb(175, 175, 175);
+  font-weight: bold;
+  padding: 0px 2px 0 2px;
+  font-size: 1.7rem;
+}
+
+.trade-settings {
+  user-select: none;
+  justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.ownedHeader {
+  user-select: none;
+  margin: 0px;
+}
+
+.owned-pos {
+  padding-top: 20px !important;
+}
+
+.trade-container {
+  align-self: flex-start;
+}
+.trade-form > div {
+  position: relative;
+  padding-top: 75px;
+}
+
+.reset-demo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  color: #67060685 !important;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bolder;
+  left: auto;
+  transform: none !important;
 }

@@ -53,7 +53,7 @@ export function OwnedTokens() {
 
   return (
     <>
-      <div className='owned-tokens'>
+      <div className='owned-tokens owned-pos'>
         <div className='header'>
           <h2 className='ownedHeader'>
             {tokens.length === 0 ? 'No tokens found' : 'Owned tokens'}

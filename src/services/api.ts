@@ -19,6 +19,9 @@ export const fetchTokens = async (setTokens: TokenSetter): Promise<void> => {
 
 export const updateBalance = async (setIsLoading: stateChangeBool) => {
   setIsLoading(true);
-  await fetch(`${import.meta.env.VITE_API_URL}/api/balance/`);
+  await fetch(`${import.meta.env.VITE_API_URL}/api/balance`, {
+    method: 'GET',
+    credentials: 'include',
+  });
   setTimeout(() => setIsLoading(false), 1000);
 };

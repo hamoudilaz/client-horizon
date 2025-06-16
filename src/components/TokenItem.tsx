@@ -17,10 +17,21 @@ export function TokenItem({ token, loadingStates, handleSell }: Props) {
         Ticker: <span className='value'>{token.symbol}</span>
       </span>
       <span className='tokenInfo'>
-        Tokens: <span className='value'>{Number(token.tokenBalance).toFixed(4)}</span>
+        Tokens:{' '}
+        <span className='value'>
+          {!token.tokenBalance
+            ? 'Token is new, Cannot get amount, sry'
+            : Number(token.tokenBalance).toFixed(4)}
+        </span>
       </span>
       <span className='tokenInfo'>
-        Value: <span className='value'> {`$${Number(token.usdValue).toFixed(4)}`}</span>
+        Value:{' '}
+        <span className='value'>
+          {' '}
+          {!token.usdValue
+            ? 'Token is new, Cannot get amount, sry'
+            : `$${Number(token.usdValue).toFixed(4)}`}
+        </span>
       </span>
       <div className='sellToken'>
         <button

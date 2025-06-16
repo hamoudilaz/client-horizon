@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { startDemoSession } from './start.js';
+import { usePubKey } from '../../utils/usePubKey.js';
 
-type WalletProps = {
-  demo: (amount: number) => void;
-};
-
-function Wallet({ demo }: WalletProps) {
+function Wallet() {
   const [amount, setAmount] = useState(0);
   const [error, setError] = useState('');
-
+  const { setValidDemo } = usePubKey();
   const handleForm = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -19,9 +16,13 @@ function Wallet({ demo }: WalletProps) {
 
     setError('');
     const res = await startDemoSession(amount);
-    if (res.error) return setError(res.error);
+    if (res.error) {
+      setError(res.error);
+      setValidDemo(false);
+      return;
+    }
+    setValidDemo(true);
     console.log(res);
-    demo(res.amount);
   };
 
   return (

@@ -67,7 +67,7 @@
 .displayKey {
   margin: 0px;
   color: rgb(158, 158, 158);
-  font-size: clamp(0.7rem, 2vw, 0.6rem);
+  font-size: clamp(0.6rem, 2vw, 0.6rem);
 }
 
 .LogoutBtn {
@@ -103,6 +103,8 @@
 
 .amount-container {
   border-radius: 1rem;
+  width: 100%;
+  text-align: center;
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
@@ -124,13 +126,9 @@
     min-height: 60px;
   }
 
-  .logoBox {
-    margin: auto;
-  }
-
   .copyBox {
     gap: 5px;
-    padding: 5px;
+    margin-top: 20px;
     position: absolute;
     top: 70px;
     left: 50%;
@@ -148,15 +146,42 @@
   }
 }
 
-.login {
-  /* margin: auto; */
-}
-
 .holding-label {
   font-weight: 700;
 }
 
-.view-SOL {
-  text-decoration: none;
-  margin-left: 10px;
+.settings-buttons {
+  margin: 15px 0px 20px 0px;
+  display: flex;
+
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+.settings-buttons button {
+  background-color: #1e1d24;
+  font-weight: 500;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(211, 211, 211);
+  width: 100%;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.settings-buttons button:hover {
+  background-color: #292833;
+}
+.settings-buttons button:active {
+  background-color: #35333f;
+  transform: scale(0.97);
+}
+
+.settings-buttons button:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.4);
 }

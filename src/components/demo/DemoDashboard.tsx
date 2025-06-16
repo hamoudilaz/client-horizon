@@ -4,7 +4,7 @@ import { ClipLoader } from 'react-spinners';
 import { sellToken } from '../../services/demo/sell.js';
 import { Switches } from '../ui/Switch.tsx';
 import { type settings, type InputEvent } from '../../utils/constants.ts';
-import validateInput from '../../helpers/validateForm.tsx';
+import validateInput from '../../utils/validateForm.ts';
 import { refreshRef, wsolRef } from '../../utils/constants';
 
 export function DemoTradeForm() {
@@ -25,29 +25,6 @@ export function DemoTradeForm() {
   });
 
   const modeRef = useRef(mode);
-
-  // async function buy(cfg: settings) {
-  //   setLoading(true);
-  //   try {
-  //     const response = await executeSwap(cfg);
-  //     console.log(response);
-
-  //     if (response.error) {
-  //       console.log(response.error);
-  //       setError(response.error);
-  //     } else {
-  //       setTimer(response.end || '');
-  //       setMess(response.message || '');
-  //     }
-  //   } catch (error: unknown) {
-  //     setError((error as Error).message);
-  //     console.error(error);
-  //   } finally {
-  //     refreshRef.current?.();
-
-  //     setLoading(false);
-  //   }
-  // }
 
   const validateForm = () => {
     const wsol = wsolRef.current;
@@ -136,6 +113,7 @@ export function DemoTradeForm() {
   return (
     <>
       <form className='styleBox wallet tradeContent' onSubmit={handleSubmit}>
+        <h2 className='trade-settings'>Trade Settings</h2>
         <div className='trade-settings'>
           <div className='msg-content'>
             {timer ? (
@@ -162,7 +140,7 @@ export function DemoTradeForm() {
         </div>
 
         <input type='text' value={config.mint} onChange={handleMint} placeholder='Enter Token CA' />
-        <label>Amount in {mode ? 'wSOL' : '%'}</label>
+        <label>Amount in {mode ? 'SOL' : '%'}</label>
         <div className='input-wrapper'>
           <input
             type='text'
@@ -180,7 +158,7 @@ export function DemoTradeForm() {
             }}
             placeholder={mode ? `0.0001` : '100% (Sell percentage, 50, 100...)'}
           />
-          <span className='input-symbol'>{mode ? 'wSOL' : '%'}</span>
+          <span className='input-symbol'>{mode ? 'SOL' : '%'}</span>
         </div>
         <Switches
           curr={config.node}
@@ -212,7 +190,7 @@ export function DemoTradeForm() {
                 }
               />
 
-              <span className='input-symbol fee-symbol'>wSOL</span>
+              <span className='input-symbol fee-symbol'>SOL</span>
             </div>
           </div>
           <div className='select'>

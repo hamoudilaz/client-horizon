@@ -6,7 +6,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useLocation } from 'react-router-dom';
 
 export function Header() {
-  const { pubKey, setPubKey, authenticated, setAuthenticated } = usePubKey();
+  const { pubKey, setPubKey, authenticated, setAuthenticated, demo } = usePubKey();
 
   const location = useLocation();
   const isDemoPage = location.pathname === '/demo';
@@ -25,6 +25,14 @@ export function Header() {
         <div className={`logoBox ${!authenticated && 'login'}`}>
           <h1 className='horizon-text'>HORIZON</h1>
         </div>
+
+        {isDemoPage && demo && (
+          <div className='copyBox mintBox'>
+            <label>Test token:</label>
+            <h2 className='displayKey'> (RNDR Contract Address)</h2>
+            <SlCopyButton value='rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof' />
+          </div>
+        )}
         {isDemoPage ? (
           <Link className='demo-button' to='/'>
             Back to Real Trading
