@@ -157,10 +157,9 @@ h2 {
   }
 }
 
-@media (max-width: 370px) {
+@media (max-width: 350px) {
   .fee-option {
     flex-direction: column;
-    gap: 0px;
   }
   .config-container {
     flex-direction: column-reverse;

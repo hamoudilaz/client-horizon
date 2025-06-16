@@ -29,13 +29,14 @@ export default function Demo() {
                 navigate('/start');
               }}
             >
-              RESET DEMO
+              Start New Demo Session
             </button>
             <DemoTradeForm />
           </div>
           <OwnedTokens />
         </div>
       </div>
+      -
     </>
   );
 }
