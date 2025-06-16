@@ -23,6 +23,7 @@ form h2 {
 }
 
 form label {
+  white-space: nowrap;
   font-size: 0.9rem;
   user-select: none;
   color: #aaa;
@@ -58,7 +59,7 @@ form select:focus {
 .fee-option {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: clamp(8px, 4vw, 10px);
 }
 
 .fee-option div {
@@ -346,14 +347,6 @@ li img {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-}
-
-.switch-mode.sell {
-  color: rgba(104, 5, 5, 0.797);
-}
-
-.switch-mode.buy {
-  color: green;
 }
 
 .trade-form {

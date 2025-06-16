@@ -13,6 +13,8 @@ export function DemoTradeForm() {
   const [mess, setMess] = useState('');
   const [timer, setTimer] = useState('');
   const [mode, setMode] = useState(true);
+  const [cache, setCache] = useState('');
+  const [cacheVisible, setCacheVisible] = useState(false);
 
   const [config, setConfig] = useState<settings>({
     mint: '',
@@ -25,6 +27,18 @@ export function DemoTradeForm() {
   });
 
   const modeRef = useRef(mode);
+
+  useEffect(() => {
+    if (cache) {
+      setCacheVisible(true);
+      const hide = setTimeout(() => setCacheVisible(false), 2000);
+      const clear = setTimeout(() => setCache(''), 2300);
+      return () => {
+        clearTimeout(hide);
+        clearTimeout(clear);
+      };
+    }
+  }, [cache]);
 
   const validateForm = () => {
     const wsol = wsolRef.current;
@@ -109,6 +123,33 @@ export function DemoTradeForm() {
       setConfig((prev) => ({ ...prev, jitoFee: 0.000001 }));
     }
   }, [config.node]);
+
+  const handleCache = () => {
+    setError('');
+    console.log(config);
+    if (!config.buyAmount || !config.mint) return setError('Cannot save empty values!');
+    localStorage.setItem('config', JSON.stringify(config));
+    setCache('Updated settings ✅ ');
+  };
+
+  const handleCacheLoad = () => {
+    setError('');
+    const cached = localStorage.getItem('config');
+    if (!cached) {
+      return setError('You dont have any settings saved');
+    }
+    setCache('Successfully loaded settings! ✅');
+    const loaded = JSON.parse(cached);
+    setConfig((prev) => ({ ...prev, ...loaded }));
+  };
+
+  const removeCache = () => {
+    setError('');
+    const cached = localStorage.getItem('config');
+    if (!cached) return setError('You dont have any settings to delete');
+    localStorage.removeItem('config');
+    setError('Settings cleared!');
+  };
 
   return (
     <>
@@ -207,6 +248,19 @@ export function DemoTradeForm() {
             </select>
           </div>
         </div>
+
+        <div className='settings-buttons'>
+          <button type='button' onClick={handleCache}>
+            save settings
+          </button>
+          <button type='button' onClick={handleCacheLoad}>
+            Load settings
+          </button>
+          <button type='button' onClick={removeCache}>
+            Clear settings
+          </button>
+        </div>
+
         <button className='buy-btn bttn buybtn' type='submit' disabled={loading}>
           {loading ? (
             <span className='text'>
@@ -216,6 +270,8 @@ export function DemoTradeForm() {
             <span className='text'>{mode ? 'buy' : 'sell'}</span>
           )}
         </button>
+
+        {cache && <span className={`status1 success ${cacheVisible ? 'show' : ''}`}>{cache}</span>}
         {loading ? (
           <span className='status'>Executing ...</span>
         ) : (

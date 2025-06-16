@@ -67,7 +67,7 @@
 .displayKey {
   margin: 0px;
   color: rgb(158, 158, 158);
-  font-size: clamp(0.6rem, 2vw, 0.6rem);
+  font-size: clamp(0.5rem, 2vw, 0.6rem);
 }
 
 .LogoutBtn {
@@ -104,7 +104,7 @@
 .amount-container {
   border-radius: 1rem;
   width: 100%;
-  text-align: center;
+  text-align: start;
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
@@ -132,6 +132,7 @@
     position: absolute;
     top: 70px;
     left: 50%;
+
     transform: translateX(-50%);
   }
 

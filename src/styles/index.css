@@ -132,6 +132,7 @@ strong {
 }
 
 .switch-mode {
+  white-space: nowrap;
   width: 100%;
   padding: 12px;
   margin-top: 6px;
@@ -143,6 +144,14 @@ strong {
   transition: 0.3s;
   border: 1px solid rgb(58, 24, 121) !important;
   box-sizing: border-box;
+}
+
+.switch-mode.sell {
+  color: rgba(104, 5, 5, 0.797);
+}
+
+.switch-mode.buy {
+  color: green;
 }
 
 .switch-mode:hover {
@@ -258,12 +267,15 @@ strong {
   }
   .demo-button {
     transform: translateX(0);
-    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-size: clamp(0.75rem, 2vw, 1.5rem);
     min-width: 100px;
   }
 
   .horizon-text {
     font-size: clamp(1.7rem, 2vw, 1.5rem);
+  }
+  .trade-container {
+    align-self: normal !important;
   }
 }
 

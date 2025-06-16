@@ -30,7 +30,10 @@ export function Header() {
           <div className='copyBox mintBox'>
             <label>Test token:</label>
             <h2 className='displayKey'> (RNDR Contract Address)</h2>
-            <SlCopyButton value='rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof' />
+            <SlCopyButton
+              value='rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof'
+              style={{ alignSelf: 'center' }}
+            />
           </div>
         )}
         {isDemoPage ? (
@@ -50,7 +53,7 @@ export function Header() {
             <div className='copyBox'>
               <label>Public Key:</label>
               <h2 className='displayKey'>{pubKey}</h2>
-              <SlCopyButton value={pubKey ?? undefined} />
+              <SlCopyButton value={pubKey ?? undefined} style={{ alignSelf: 'center' }} />
             </div>
 
             <div className='logout-container'>
