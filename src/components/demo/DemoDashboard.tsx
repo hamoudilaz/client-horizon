@@ -22,7 +22,7 @@ export function DemoTradeForm() {
     sellAmount: 0,
     slippage: 10,
     fee: 0.000001,
-    jitoFee: 0.00001,
+    jitoFee: 0,
     node: false,
   });
 
@@ -120,7 +120,7 @@ export function DemoTradeForm() {
     if (config.node) {
       setConfig((prev) => ({ ...prev, jitoFee: 0.001 }));
     } else {
-      setConfig((prev) => ({ ...prev, jitoFee: 0.000001 }));
+      setConfig((prev) => ({ ...prev, jitoFee: 0 }));
     }
   }, [config.node]);
 
@@ -150,7 +150,6 @@ export function DemoTradeForm() {
     localStorage.removeItem('config');
     setError('Settings cleared!');
   };
-
   return (
     <>
       <form className='styleBox wallet tradeContent' onSubmit={handleSubmit}>
@@ -185,7 +184,7 @@ export function DemoTradeForm() {
         <div className='input-wrapper'>
           <input
             type='text'
-            defaultValue=''
+            defaultValue={(mode && config.buyAmount) || ''}
             max={100}
             maxLength={100}
             onChange={(e) => {
@@ -224,11 +223,12 @@ export function DemoTradeForm() {
               <label>Priority fee:</label>
               <input
                 type='text'
-                defaultValue=''
+                defaultValue={(mode && config.jitoFee) || ''}
                 placeholder='0.01'
-                onChange={(e) =>
-                  setConfig((prev) => ({ ...prev, jitoFee: Number(e.target.value) }))
-                }
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setConfig((prev) => ({ ...prev, jitoFee: value }));
+                }}
               />
 
               <span className='input-symbol fee-symbol'>SOL</span>
