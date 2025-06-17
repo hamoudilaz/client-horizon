@@ -19,9 +19,15 @@ export const fetchTokens = async (setTokens: TokenSetter): Promise<void> => {
 
 export const updateBalance = async (setIsLoading: stateChangeBool) => {
   setIsLoading(true);
-  await fetch(`${import.meta.env.VITE_API_URL}/api/balance`, {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/balance`, {
     method: 'GET',
     credentials: 'include',
   });
-  setTimeout(() => setIsLoading(false), 1000);
+
+  const data = await res.json();
+  console.log(data);
+  if (!data || data.error) {
+    return console.error('Error fetching price');
+  }
+  return data.portfolio;
 };

@@ -8,7 +8,7 @@ interface SwitchesProps {
 
 export function Switches({ curr, onChange }: SwitchesProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', gap: '4px', alignItems: 'center' }}>
       <label style={{ fontWeight: 'bold', cursor: 'help', fontSize: '13px' }}>
         Execution mode:
       </label>

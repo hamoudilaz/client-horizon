@@ -60,16 +60,23 @@ export function OwnedTokens() {
           </h2>
 
           {tokens.length > 0 && !isLoading && null}
-          {tokens.length !== 0 && (
-            <>
-              {isLoading ? (
-                <Loading />
-              ) : (
-                <button className='loading' onClick={() => updateBalance(setIsLoading)}>
-                  Update
-                </button>
-              )}
-            </>
+
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <button
+              className='loading'
+              onClick={async () => {
+                setIsLoading(true);
+                const newTokens = await updateBalance(setIsLoading);
+                if (newTokens.length > 0) {
+                  setTokens((prev) => [...prev, ...newTokens]);
+                }
+                setIsLoading(false);
+              }}
+            >
+              Update
+            </button>
           )}
         </div>
         {mess ? (
