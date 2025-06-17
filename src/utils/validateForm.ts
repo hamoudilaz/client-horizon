@@ -1,4 +1,4 @@
-import type { settings } from '../utils/constants';
+import type { settings } from './constants';
 export default function validateInput(
   config: settings,
   wsol: number,
@@ -34,7 +34,6 @@ export default function validateInput(
       return `You dont have enough wSOL: buy amount: ${config.buyAmount}, owned: ${wsol}`;
     }
   } else if (!demo) {
-    console.log('AT SELL VALIDATE');
     if (
       !Number.isInteger(config.sellAmount ?? -1) ||
       (config.sellAmount ?? 0) <= 0 ||

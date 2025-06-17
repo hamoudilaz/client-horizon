@@ -28,9 +28,13 @@ export function Amount() {
   return (
     <>
       <div className='display-container'>
-        <div className='info-box'>
-          <span className='label blue SOL-price'>Current SOL price:</span>
-          <span className='value blue'>${amount.SOLPRICE}</span>{' '}
+        <div className='info-box sol-box'>
+          <div>
+            <span className='label blue SOL-price'>Current SOL price:</span>
+            <span className='value blue sol-number'>
+              {amount.SOLPRICE ? `$${amount.SOLPRICE}` : <span className='placeholder' />}
+            </span>
+          </div>
           <span>
             <a
               className='view-SOL'
@@ -48,15 +52,21 @@ export function Amount() {
           <div className='amount-container'>
             <div className='info-box'>
               <span className='label blue'>Value in USD:</span>
-              <span className='value blue'>${amount.usdValue}</span>
+              <span className='value blue'>
+                {amount.usdValue ? `$${amount.usdValue}` : <span className='placeholder' />}
+              </span>
             </div>
             <div className='info-box'>
               <span className='label green'>SOL:</span>
-              <span className='value green'>{amount.SOL} SOL</span>
+              <span className='value green'>
+                {amount.SOL ? `${amount.SOL} SOL` : <span className='placeholder' />}
+              </span>
             </div>
             <div className='info-box'>
-              <span className='label yellow'>wSOL:</span>
-              <span className='value yellow'>{amount.WSOL} WSOL</span>
+              <span className='label green'>SOL:</span>
+              <span className='value green'>
+                {amount.WSOL ? `${amount.WSOL} wSOL` : <span className='placeholder' />}
+              </span>
             </div>
           </div>
         </div>

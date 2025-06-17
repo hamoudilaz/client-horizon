@@ -9,8 +9,7 @@ export default function Dashboard() {
         <Amount />
 
         <div className='trade-form'>
-          <div>
-            <h2 className='trade-settings'>Trade Settings</h2>
+          <div className='trade-container main-trade-container'>
             <TradeForm />
           </div>
           <OwnedTokens />

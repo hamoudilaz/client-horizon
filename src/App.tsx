@@ -10,9 +10,9 @@ const App = () => {
   const location = useLocation();
   const isDemo = location.pathname === '/demo';
 
-  const { pubKey, authenticated } = usePubKey();
+  const { pubKey, authenticated, demo } = usePubKey();
 
-  if (!isDemo && authenticated === null) return null;
+  if ((!isDemo && authenticated === null) || (demo === null && authenticated === null)) return null;
 
   return (
     <div className='app-layout'>
