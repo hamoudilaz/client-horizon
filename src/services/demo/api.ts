@@ -26,7 +26,7 @@ export const fetchTokens = async (setTokens: TokenSetter): Promise<void> => {
 
 export const mockUpdateBalance = async (setIsLoading: stateChangeBool) => {
   setIsLoading(true);
-  setTimeout(() => setIsLoading(false), 2000);
+  setTimeout(() => setIsLoading(false), 20300);
 };
 
 export const checkDemo = async () => {

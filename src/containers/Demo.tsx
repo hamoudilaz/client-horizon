@@ -21,7 +21,7 @@ export default function Demo() {
         <div className='trade-form'>
           <div className='trade-container'>
             <button
-              className='LogoutBtn demo-button reset-demo'
+              className='loading demo-button reset-demo'
               onClick={async () => {
                 await resetDemo();
                 setAuthenticated(false);

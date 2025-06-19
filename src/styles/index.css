@@ -406,6 +406,9 @@ h2.trade-settings {
 }
 
 .trade-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   align-self: flex-start;
 }
 .trade-form > div {
@@ -413,20 +416,11 @@ h2.trade-settings {
   padding-top: 75px;
 }
 .reset-demo {
-  position: absolute;
-  top: 0;
-  right: 0;
   letter-spacing: 0.5px;
-  transform: scaleY(1.1); /* actual vertical stretch */
-
-  width: 100%;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 12px !important;
   font-weight: bolder;
-  left: auto;
-
   background: linear-gradient(350deg, #6f00e6 30%, #0051ff 100%) !important;
   background-size: 100% 100%;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  color: transparent !;
 }

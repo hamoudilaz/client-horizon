@@ -65,7 +65,7 @@ export function OwnedTokens() {
             <Loading />
           ) : (
             <button
-              className='loading'
+              className='loading demo-button'
               onClick={async () => {
                 setIsLoading(true);
                 const newTokens = await updateBalance(setIsLoading);

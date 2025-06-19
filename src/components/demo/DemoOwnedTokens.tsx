@@ -64,9 +64,14 @@ export function OwnedTokens() {
           {tokens.length !== 0 && (
             <>
               {isLoading ? (
-                <Loading />
+                <div style={{ padding: '14px 20px' }}>
+                  <Loading />
+                </div>
               ) : (
-                <button className='loading' onClick={() => mockUpdateBalance(setIsLoading)}>
+                <button
+                  className='loading demo-button'
+                  onClick={() => mockUpdateBalance(setIsLoading)}
+                >
                   Update
                 </button>
               )}
