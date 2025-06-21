@@ -168,16 +168,15 @@ export function DemoTradeForm() {
             ) : null}
           </div>
         </div>
-        <div className='config-container'>
-          <label>Token Contract Address:</label>
-          <button
-            type='button'
-            className={`btn switch-mode w-50 ${mode ? 'sell' : 'buy'}`}
-            onClick={handleMode}
-          >
-            <b>Switch to: {mode ? 'sell' : 'buy'}</b>
-          </button>
-        </div>
+        <button
+          type='button'
+          className={`btn switch-mode w-100 ${mode ? 'sell' : 'buy'}`}
+          onClick={handleMode}
+        >
+          <b>Switch to: {mode ? 'sell' : 'buy'}</b>
+        </button>
+
+        <label>Token Contract Address:</label>
 
         <input type='text' value={config.mint} onChange={handleMint} placeholder='Enter Token CA' />
         <label>Amount in {mode ? 'SOL' : '%'}</label>
@@ -207,7 +206,7 @@ export function DemoTradeForm() {
         <div className='fee-option'>
           <div className='slippage'>
             <div className='input-wrapper'>
-              <label>Slippage (%):</label>
+              <label>Slippage:</label>
               <input
                 type='text'
                 value={config.slippage}

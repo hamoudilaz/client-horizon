@@ -52,12 +52,12 @@ form select {
 form select {
   background-color: #0d0c11;
   -webkit-appearance: none;
+
   appearance: none;
   background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23959595" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 1.2em;
-  padding-right: 40px;
 }
 
 form input:focus,
@@ -169,7 +169,7 @@ h2 {
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 390px) {
   .fee-option {
     flex-direction: column;
   }
@@ -177,7 +177,7 @@ h2 {
     flex-direction: column-reverse;
   }
   .fee-symbol {
-    font-size: 10px !important;
+    font-size: 12px !important;
   }
 }
 
@@ -435,7 +435,7 @@ li img {
   transform: scale(0.99);
 }
 .fee-view {
-  font-size: 12px;
+  font-size: 11px;
   opacity: 0.4;
   user-select: none;
 }

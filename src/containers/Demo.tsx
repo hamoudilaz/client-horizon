@@ -36,7 +36,6 @@ export default function Demo() {
           <OwnedTokens />
         </div>
       </div>
-      -
     </>
   );
 }

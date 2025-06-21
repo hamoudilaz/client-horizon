@@ -193,7 +193,7 @@ strong {
 
 .fee-symbol {
   position: absolute;
-  font-size: clamp(6px, 2vw, 15px);
+  font-size: clamp(12px, 2vw, 15px);
   top: 58%;
   right: 12px;
   transform: translateY(-50%);
