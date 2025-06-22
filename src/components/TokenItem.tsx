@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Switches } from '../components/ui/Switch';
-import { ClipLoader } from 'react-spinners';
 import type { Props } from '../utils/constants';
 import { Loading } from './ui/Loading';
 
@@ -42,8 +41,6 @@ export function TokenItem({ token, loadingStates, handleSell }: Props) {
           {loadingStates[`${token.tokenMint}-50`] ? (
             <Loading value={true} />
           ) : (
-            // <ClipLoader size={16} color='#fff' className='load' />
-
             <span className='text'>Sell 50%</span>
           )}
         </button>
@@ -54,7 +51,7 @@ export function TokenItem({ token, loadingStates, handleSell }: Props) {
           disabled={loadingStates[`${token.tokenMint}-100`]}
         >
           {loadingStates[`${token.tokenMint}-100`] ? (
-            <ClipLoader size={16} color='#fff' className='load' />
+            <Loading value={true} />
           ) : (
             <span className='text'>Sell 100%</span>
           )}

@@ -169,7 +169,7 @@ h2 {
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 360px) {
   .fee-option {
     flex-direction: column;
   }
