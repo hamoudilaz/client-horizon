@@ -193,7 +193,7 @@ strong {
 
 .fee-symbol {
   position: absolute;
-  font-size: clamp(6px, 2vw, 15px);
+  font-size: clamp(12px, 2vw, 15px);
   top: 58%;
   right: 12px;
   transform: translateY(-50%);
@@ -265,18 +265,27 @@ strong {
   }
 }
 
+@media (max-width: 350px) {
+  .navbar {
+    justify-content: center !important;
+  }
+  .demo-button {
+    width: 100%;
+  }
+}
+
 @media (max-width: 480px) {
   .display-container {
     margin-top: 50px !important;
   }
   .demo-button {
     transform: translateX(0);
-    font-size: clamp(0.75rem, 2vw, 1.5rem);
+    font-size: clamp(0.7rem, 2vw, 1.5rem);
     min-width: 100px;
   }
 
   .horizon-text {
-    font-size: clamp(1.7rem, 2vw, 1.5rem);
+    font-size: clamp(1.6rem, 2vw, 1.5rem);
   }
   .trade-container {
     align-self: normal !important;
@@ -406,6 +415,9 @@ h2.trade-settings {
 }
 
 .trade-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   align-self: flex-start;
 }
 .trade-form > div {
@@ -413,20 +425,11 @@ h2.trade-settings {
   padding-top: 75px;
 }
 .reset-demo {
-  position: absolute;
-  top: 0;
-  right: 0;
   letter-spacing: 0.5px;
-  transform: scaleY(1.1); /* actual vertical stretch */
-
-  width: 100%;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 12px !important;
   font-weight: bolder;
-  left: auto;
-
   background: linear-gradient(350deg, #6f00e6 30%, #0051ff 100%) !important;
   background-size: 100% 100%;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  color: transparent !;
 }

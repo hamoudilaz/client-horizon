@@ -6,11 +6,18 @@ import { Header } from './components/Header';
 import Demo from './containers/Demo';
 import { useLocation } from 'react-router-dom';
 
+import { useEffect } from 'react';
+
 const App = () => {
   const location = useLocation();
   const isDemo = location.pathname === '/demo';
 
   const { pubKey, authenticated, demo } = usePubKey();
+
+  useEffect(() => {
+    const name = location.pathname === '/' ? 'Home' : location.pathname.slice(1);
+    document.title = `Horizon | ${name.charAt(0).toUpperCase() + name.slice(1)}`;
+  }, [location.pathname]);
 
   if ((!isDemo && authenticated === null) || (demo === null && authenticated === null)) return null;
 

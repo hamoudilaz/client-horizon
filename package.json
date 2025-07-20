@@ -10,13 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.1.1",
     "@mui/material": "^7.1.1",
     "@shoelace-style/shoelace": "^2.20.1",
-    "@tailwindcss/vite": "^4.0.14",
-    "bootstrap": "^5.3.6",
+    "bootstrap": "^5.3.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0",

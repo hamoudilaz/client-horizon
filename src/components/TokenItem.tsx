@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Switches } from '../components/ui/Switch';
-import { ClipLoader } from 'react-spinners';
 import type { Props } from '../utils/constants';
+import { Loading } from './ui/Loading';
 
 export function TokenItem({ token, loadingStates, handleSell }: Props) {
   const [node, setNode] = useState(false);
@@ -21,16 +21,14 @@ export function TokenItem({ token, loadingStates, handleSell }: Props) {
         <span className='value'>
           {!token.tokenBalance
             ? 'Token is new, Cannot get amount, sry'
-            : Number(token.tokenBalance).toFixed(4)}
+            : Number(token.tokenBalance)}
         </span>
       </span>
       <span className='tokenInfo'>
         Value:{' '}
         <span className='value'>
           {' '}
-          {!token.usdValue
-            ? 'Token is new, Cannot get amount, sry'
-            : `$${Number(token.usdValue).toFixed(4)}`}
+          {!token.usdValue ? 'Token is new, Cannot get amount, sry' : `$${Number(token.usdValue)}`}
         </span>
       </span>
       <div className='sellToken'>
@@ -41,7 +39,7 @@ export function TokenItem({ token, loadingStates, handleSell }: Props) {
           disabled={loadingStates[`${token.tokenMint}-50`]}
         >
           {loadingStates[`${token.tokenMint}-50`] ? (
-            <ClipLoader size={16} color='#fff' className='load' />
+            <Loading value={true} />
           ) : (
             <span className='text'>Sell 50%</span>
           )}
@@ -53,7 +51,7 @@ export function TokenItem({ token, loadingStates, handleSell }: Props) {
           disabled={loadingStates[`${token.tokenMint}-100`]}
         >
           {loadingStates[`${token.tokenMint}-100`] ? (
-            <ClipLoader size={16} color='#fff' className='load' />
+            <Loading value={true} />
           ) : (
             <span className='text'>Sell 100%</span>
           )}
