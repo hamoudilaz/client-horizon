@@ -31,3 +31,28 @@ export const updateBalance = async (setIsLoading: stateChangeBool) => {
   }
   return data.portfolio;
 };
+
+export const updateSingleTokenBalance = async (
+  setIsLoading: stateChangeBool,
+  tokenMint: string,
+  tokenBalance: number
+) => {
+  setIsLoading(true);
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/single/balance`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      tokenMint: tokenMint,
+      tokenBalance: tokenBalance,
+    }),
+  });
+
+  const data = await res.json();
+  if (!data || data.error) {
+    return console.error('Error fetching price');
+  }
+  return Number(data.usdValue);
+};
