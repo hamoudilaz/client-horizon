@@ -2,14 +2,39 @@ import { useState } from 'react';
 import { Switches } from '../components/ui/Switch';
 import type { Props } from '../utils/constants';
 import { Loading } from './ui/Loading';
+import { Button } from '@mui/material';
+import { updateSingleTokenBalance } from '../services/api';
 
 export function TokenItem({ token, loadingStates, handleSell }: Props) {
   const [node, setNode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <li className='tokenList'>
       <div>
         <img src={token.logoURI ? token.logoURI : 'vite.svg'} />
+
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <Button
+            style={{ float: 'right' }}
+            onClick={async () => {
+              const mint = token.tokenMint;
+              const totalTokens = token.tokenBalance;
+
+              setIsLoading(true);
+              const newTokenValue = await updateSingleTokenBalance(setIsLoading, mint, totalTokens);
+              if (typeof newTokenValue === 'number') {
+                token.usdValue = newTokenValue;
+              }
+
+              setIsLoading(false);
+            }}
+          >
+            Refresh token
+          </Button>
+        )}
         <Switches curr={node} onChange={setNode} />
       </div>
       <span className='tokenInfo'>{token.tokenMint} </span>
