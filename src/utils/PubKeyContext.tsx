@@ -72,8 +72,11 @@ export const PubKeyProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const authenticateWebSocket = () => {
       if (authenticated && pubKey && ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({ type: 'auth', pubKey: pubKey }));
-        console.log('WebSocket authenticated with pubKey:', pubKey);
+      const clientId = sessionStorage.getItem('clientId') ?? crypto.randomUUID();
+      sessionStorage.setItem('clientId', clientId);
+
+      ws.send(JSON.stringify({ type: 'auth', pubKey, clientId }));        
+      console.log('WebSocket authenticated with pubKey:', pubKey);
       }
     };
 
