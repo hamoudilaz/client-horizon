@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 import { updateSingleTokenBalance } from '../services/api';
 
 export function TokenItem({ token, loadingStates, handleSell }: Props) {
-  const [node, setNode] = useState(false);
+  const [node, setNode] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   return (

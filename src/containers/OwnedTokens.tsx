@@ -14,6 +14,10 @@ export function OwnedTokens() {
   const [mess, setMess] = useState<string | false>(false);
   const [timer, setTimer] = useState(false);
   const [error, setError] = useState('');
+  const [sellFee, setSellFee] = useState(0.002);
+
+
+
 
   const [loadingStates, setLoadingStates] = useState({});
 
@@ -28,6 +32,16 @@ export function OwnedTokens() {
   }, []);
 
   const handleSell = async (token: Token, percent: number, node: boolean) => {
+
+
+    if (isNaN(sellFee) || sellFee >= 0.1 || sellFee < 0) {
+      setError('Invalid fee value');
+      return;
+    }
+
+    if (sellFee > 0.0001 && sellFee < 0.1) {
+      setSellFee(sellFee);
+    }
     const key = `${token.tokenMint}-${percent}`;
     setLoadingStates((prev) => ({ ...prev, [key]: true }));
 
@@ -38,7 +52,7 @@ export function OwnedTokens() {
       node,
       slippage: 25,
       fee: node ? 0.0001 : 0.00001,
-      jitoFee: node ? 0.001 : 0.00001,
+      jitoFee: node ? sellFee : 0.00001,
     });
 
     if (sell?.error) {
@@ -91,8 +105,19 @@ export function OwnedTokens() {
             <span className='error-msg'>{error}</span>
           </div>
         )}
+          {tokens.length > 0 && (
+          <>
+         <input
+          className='sell-fee-input'
+          type='text'
+          onChange={(e)=> setSellFee(Number(e.target.value))}
+          placeholder='Sell Fee override (optional)'
+        />
+          </>
+          )
+         }
+        <ul className='tokenBox'> 
 
-        <ul className='tokenBox'>
           {tokens.map((token) => (
             <TokenItem
               key={token.tokenMint}
