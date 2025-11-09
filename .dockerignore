@@ -1,0 +1,23 @@
+node_modules
+dist
+.git
+\*.log
+
+# From your .gitignore
+
+Dockerfile
+nginx.conf
+_.local
+.vscode/_
+.idea
+.DS_Store
+_.suo
+_.ntvs\*
+_.njsproj
+_.sln
+\*.sw?
+.env
+
+# Files
+
+README.md

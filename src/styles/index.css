@@ -1,0 +1,460 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+label,
+div,
+li,
+a,
+strong {
+  color: rgb(206, 206, 206);
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* This ensures the wrapper is at least as tall as the screen */
+}
+.bttn:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  pointer-events: none;
+
+  cursor: not-allowed;
+}
+.labbel {
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+.privKey {
+  color: #bcbcbc;
+  box-sizing: border-box; /* ✅ Prevents shrinking */
+}
+
+.privKey:focus {
+  border-color: #6a11cb;
+  outline: none;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+}
+
+.pubKey {
+  font-size: large;
+  color: #bcbcbc;
+  box-sizing: border-box; /* ✅ Prevents shrinking */
+}
+
+.owned-tokens,
+.trade-settings,
+.dashboard {
+  animation: fadeIn 0.5s ease-in-out;
+}
+.owned-tokens {
+  position: relative;
+  padding-top: 30px;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  gap: 40px;
+}
+
+.dashboard-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: row;
+  width: 100%;
+  gap: inherit;
+}
+
+.wallet {
+  max-width: 530px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .wallet {
+    max-width: 100% !important;
+  }
+
+  .trade-form,
+  .owned-tokens {
+    gap: 30px;
+    max-width: 100% !important;
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.owned-tokens {
+  align-self: baseline;
+}
+
+.show-mode,
+.show-valuta {
+  color: #126c0c;
+}
+
+.switch-mode {
+  white-space: nowrap;
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 15px;
+  background-color: transparent;
+  border: 1px solid rgb(33, 19, 49);
+  color: rgb(149, 149, 149);
+  border-radius: 6px;
+  transition: 0.3s;
+  border: 1px solid rgb(58, 24, 121) !important;
+  box-sizing: border-box;
+}
+
+.switch-mode.sell {
+  font-weight: 500;
+
+  background: linear-gradient(350deg, #6f00e6 30%, #0051ff 100%) !important;
+  background-size: 100% 100%;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !;
+}
+
+.switch-mode.buy {
+  color: green;
+}
+
+.switch-mode:hover {
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+  border-color: #6a11cb !important;
+  outline: none !important;
+  background-color: #0d0c11 !important;
+}
+
+.switch-mode:focus {
+  border-color: #6a11cb;
+  outline: none;
+  transform: scale(1.02);
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+}
+
+.config-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+.msg-content {
+  display: flex;
+  justify-content: space-between;
+}
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.fee-symbol {
+  position: absolute;
+  font-size: clamp(12px, 2vw, 15px);
+  top: 58%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #7b7b7b;
+  pointer-events: none;
+}
+
+.demo-button {
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+
+  border: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgb(196, 196, 196);
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-width: 140px;
+  box-shadow: 0 0px 3px rgba(89, 0, 255, 1);
+  padding: 14px 28px; /* Moved padding here */
+}
+
+.demo-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.demo-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.demo-button:hover::before {
+  left: 100%;
+}
+
+.demo-button:active {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.demo-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Remove the nested a styling since we're no longer nesting */
+
+.copyBoxWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.clean-wallet-btn {
+  padding: 0px;
+  min-width: 160px;
+}
+
+@media (max-width: 350px) {
+  .navbar {
+    justify-content: center !important;
+  }
+  .demo-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .display-container {
+    margin-top: 50px !important;
+  }
+  .demo-button {
+    transform: translateX(0);
+    font-size: clamp(0.7rem, 2vw, 1.5rem);
+    min-width: 100px;
+  }
+
+  .horizon-text {
+    font-size: clamp(1.6rem, 2vw, 1.5rem);
+    margin-bottom: 0px;
+  }
+  .trade-container {
+    align-self: normal !important;
+  }
+  .clean-wallet-btn {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 512px) {
+  .clean-wallet-btn {
+    padding: 9px;
+    top: 70px;
+    width: 80%;
+  }
+
+  .LogoutBtn {
+    padding: 2px !important;
+  }
+  .main-container {
+    margin-top: 70px;
+  }
+
+  .copyBoxWrapper {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.holding-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+
+  /* Modern glassmorphism background */
+  background: rgba(40, 40, 60, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* Subtle gradient border */
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 16px;
+
+  /* Modern shadow with purple tint */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(124, 58, 237, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* Smooth transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.holding-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(124, 58, 237, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.display-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+.SOL-price {
+  font-weight: 500 !important;
+  font-size: clamp(0.7rem, 2.5vw, 1.5rem); /* Scales with viewport and container */
+  font-weight: bolder;
+  display: inline-block;
+  margin: 0px;
+}
+
+.sol-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px !important;
+  margin: 0px !important;
+  width: 100%;
+}
+
+.sol-number {
+  font-size: clamp(0.7rem, 2vw, 1.1rem); /* Scales with viewport and container */
+}
+
+.view-SOL {
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+  font-size: clamp(0.7rem, 2vw, 1.1rem); /* Scales with viewport and container */
+}
+
+.placeholder {
+  display: inline-block;
+  width: 80px;
+  height: 1.2em;
+  background-color: #ddd;
+  border-radius: 4px;
+  animation: pulse 1.5s ease-in-out infinite;
+  vertical-align: middle;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+form.styleBox {
+  position: relative;
+
+  padding-top: 30px;
+}
+
+h2.trade-settings {
+  position: absolute;
+  display: flex;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  background-color: #0d0c11;
+  color: rgb(175, 175, 175);
+  font-weight: bold;
+  padding: 0px 2px 0 2px;
+  font-size: 1.7rem;
+}
+
+.trade-settings {
+  user-select: none;
+  justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.ownedHeader {
+  user-select: none;
+  margin: 0px;
+}
+
+.owned-pos {
+  padding-top: 20px !important;
+}
+
+.trade-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-self: flex-start;
+}
+.trade-form > div {
+  position: relative;
+  padding-top: 75px;
+}
+.reset-demo {
+  letter-spacing: 0.5px;
+  border-radius: 12px !important;
+  font-weight: bolder;
+  background: linear-gradient(350deg, #6f00e6 30%, #0051ff 100%) !important;
+  background-size: 100% 100%;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
