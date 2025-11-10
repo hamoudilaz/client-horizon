@@ -17,7 +17,19 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Create GitHub Deployment
+        uses: peter-evans/create-deployment@v3
+        id: deployment
+        with:
+          environment: production
+
       - name: Deploy to Railway
         run: |
           npm install -g @railway/cli
           RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }} railway redeploy -s frontend --yes
+
+      - name: Update Deployment Status
+        uses: peter-evans/create-deployment-status@v4
+        with:
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          state: success

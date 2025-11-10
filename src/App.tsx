@@ -13,7 +13,6 @@ const App = () => {
   const isDemo = location.pathname === '/demo';
 
   const { pubKey, authenticated, demo } = usePubKey();
-  console.log('test');
   useEffect(() => {
     const name = location.pathname === '/' ? 'Home' : location.pathname.slice(1);
     document.title = `Horizon | ${name.charAt(0).toUpperCase() + name.slice(1)}`;
