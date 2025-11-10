@@ -10,9 +10,12 @@ export function Amount() {
     WSOL: 0,
     SOLPRICE: 0,
   });
+  const [isBroke, setIsBroke] = useState<boolean>(false);
 
   const fetchAmount = async () => {
     const owned = await getAmount();
+    const isBroke = owned.usdValue === 0;
+    setIsBroke(isBroke);
     if (owned) {
       setAmount(owned);
       wsolRef.current = owned.WSOL;
@@ -28,7 +31,7 @@ export function Amount() {
   return (
     <>
       <div className='display-container'>
-        {amount.usdValue === 0 && <strong> You are broke 😂</strong>}
+        {isBroke && <strong> You are broke 😂</strong>}
         <div className='info-box sol-box'>
           <div>
             <span className='label blue SOL-price'>Current SOL price:</span>
