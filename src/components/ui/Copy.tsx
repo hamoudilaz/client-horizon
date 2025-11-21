@@ -5,11 +5,8 @@ export default function CopyContainer() {
     <>
       <div className='copyBox mintBox'>
         <label>Test token:</label>
-        <h2 className='displayKey'> (RNDR Contract Address)</h2>
-        <SlCopyButton
-          value='rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof'
-          style={{ alignSelf: 'center' }}
-        />
+        <h2 className='displayKey'> (BONK Contract Address)</h2>
+        <SlCopyButton value='DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263' style={{ alignSelf: 'center' }} />
       </div>
     </>
   );
