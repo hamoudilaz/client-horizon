@@ -20,4 +20,4 @@ jobs:
       - name: Deploy to Railway
         run: |
           npm install -g @railway/cli
-          RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }} railway redeploy -s frontend --yes
+          RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }} railway up -s frontend --yes
