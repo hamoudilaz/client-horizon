@@ -4,7 +4,6 @@ import { refreshRef } from './constants';
 export const handleMessage = async (event: MessageEvent, setTokens: TokenSetter) => {
   const newToken = JSON.parse(event.data);
 
-  console.log(newToken);
   if (newToken.listToken || newToken.removed) {
     refreshRef.current?.();
 
