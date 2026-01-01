@@ -59,10 +59,13 @@ export const updateSingleTokenBalance = async (
   return Number(data.usdValue);
 };
 
-export const cleanWallet = async () => {
+export const cleanWallet = async (isHardCleanup: boolean) => {
   const res = await fetch(`${API_BASE}/api/cleanup`, {
     method: 'POST',
     credentials: 'include',
+    body: JSON.stringify({
+      isHardCleanup,
+    }),
   });
 
   const data = await res.json();

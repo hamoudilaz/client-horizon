@@ -19,7 +19,7 @@ export default function CleanWalletDialog() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<CleanWalletResultProps | null>(null);
   const [resultOpen, setResultOpen] = useState(false);
-
+  const [isHardCleanup, setIsHardCleanup] = useState(false);
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => !loading && setOpen(false);
   const handleResultClose = () => setResultOpen(false);
@@ -27,7 +27,7 @@ export default function CleanWalletDialog() {
   const handleConfirm = async () => {
     setLoading(true);
     try {
-      const data = await cleanWallet();
+      const data = await cleanWallet(isHardCleanup);
       setResult(data);
     } catch {
       setResult({ cleaned: 0, claimedSol: 0, claimedUsd: 0 });
@@ -60,9 +60,24 @@ export default function CleanWalletDialog() {
               <CircularProgress color='success' />
             </div>
           ) : (
-            <DialogContentText sx={{ color: '#ccc' }}>
-              This will remove dust token accounts and reclaim SOL rent.
-            </DialogContentText>
+            <>
+              <DialogContentText sx={{ color: '#ccc' }}>
+                This will remove dust token accounts and reclaim SOL rent.
+              </DialogContentText>
+              <div style={{ display: 'flex', alignItems: 'center', marginTop: 16 }}>
+                <label htmlFor='hard-cleanup-switch' style={{ color: '#ccc', marginRight: 8 }}>
+                  Hard Cleanup (close all accounts):
+                </label>
+                <input
+                  id='hard-cleanup-switch'
+                  type='checkbox'
+                  checked={isHardCleanup}
+                  onChange={(e) => setIsHardCleanup(e.target.checked)}
+                  style={{ transform: 'scale(1.2)' }}
+                  disabled={loading}
+                />
+              </div>
+            </>
           )}
         </DialogContent>
         {!loading && (
