@@ -6,7 +6,6 @@ dist
 # From your .gitignore
 
 Dockerfile
-nginx.conf
 _.local
 .vscode/_
 .idea
