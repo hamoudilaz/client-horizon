@@ -5,15 +5,14 @@ dist
 
 # From your .gitignore
 
-Dockerfile
 _.local
 .vscode/_
 .idea
-.DS_Store
-_.suo
+.DS*Store
+*.suo
 _.ntvs\*
 _.njsproj
-_.sln
+\_.sln
 \*.sw?
 .env
 
