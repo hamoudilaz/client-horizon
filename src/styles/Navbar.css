@@ -25,7 +25,9 @@
 .styleBox {
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0px 0px 5px rgb(69, 0, 149), inset 0px 0px 5px rgb(69, 0, 149);
+  box-shadow:
+    0px 0px 5px rgb(69, 0, 149),
+    inset 0px 0px 5px rgb(69, 0, 149);
 }
 
 .copyBox {

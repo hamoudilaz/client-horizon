@@ -40,7 +40,11 @@ export function Amount() {
             </span>
           </div>
           <span>
-            <a className='view-SOL' target='__blank' href='https://coinmarketcap.com/currencies/solana/'>
+            <a
+              className='view-SOL'
+              target='__blank'
+              href='https://coinmarketcap.com/currencies/solana/'
+            >
               View graph
             </a>
           </span>
@@ -51,7 +55,11 @@ export function Amount() {
             <div className='info-box'>
               <span className='label blue'>Value in USD:</span>
               <span className='value blue'>
-                {amount.usdValue !== undefined ? `$${amount.usdValue}` : <span className='placeholder' />}
+                {amount.usdValue !== undefined ? (
+                  `$${amount.usdValue}`
+                ) : (
+                  <span className='placeholder' />
+                )}
               </span>
             </div>
             <div className='info-box'>
@@ -63,7 +71,11 @@ export function Amount() {
             <div className='info-box'>
               <span className='label green'>Wrapped SOL:</span>
               <span className='value green'>
-                {amount.WSOL !== undefined ? `${amount.WSOL} wSOL` : <span className='placeholder' />}
+                {amount.WSOL !== undefined ? (
+                  `${amount.WSOL} wSOL`
+                ) : (
+                  <span className='placeholder' />
+                )}
               </span>
             </div>
           </div>

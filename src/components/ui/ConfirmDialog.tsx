@@ -53,7 +53,9 @@ export default function CleanWalletDialog() {
           sx: { backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #333' },
         }}
       >
-        <DialogTitle sx={{ color: '#d1d1d1ff' }}>{loading ? 'Cleaning Wallet...' : 'Clean Wallet?'}</DialogTitle>
+        <DialogTitle sx={{ color: '#d1d1d1ff' }}>
+          {loading ? 'Cleaning Wallet...' : 'Clean Wallet?'}
+        </DialogTitle>
         <DialogContent>
           {loading ? (
             <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>

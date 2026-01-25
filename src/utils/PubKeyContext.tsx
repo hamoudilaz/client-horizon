@@ -94,7 +94,9 @@ export const PubKeyProvider = ({ children }: { children: ReactNode }) => {
   }, [authenticated, pubKey]);
 
   return (
-    <PubKeyContext.Provider value={{ pubKey, setPubKey, authenticated, setAuthenticated, setValidDemo, demo }}>
+    <PubKeyContext.Provider
+      value={{ pubKey, setPubKey, authenticated, setAuthenticated, setValidDemo, demo }}
+    >
       {children}
     </PubKeyContext.Provider>
   );

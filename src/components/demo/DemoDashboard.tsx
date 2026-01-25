@@ -189,9 +189,17 @@ export function DemoTradeForm() {
             onChange={(e) => {
               const value = Number(e.target.value);
               if (modeRef.current) {
-                setConfig((prev) => ({ ...prev, buyAmount: value, sellAmount: 0 }));
+                setConfig((prev) => ({
+                  ...prev,
+                  buyAmount: value,
+                  sellAmount: 0,
+                }));
               } else {
-                setConfig((prev) => ({ ...prev, sellAmount: value, buyAmount: 0 }));
+                setConfig((prev) => ({
+                  ...prev,
+                  sellAmount: value,
+                  buyAmount: 0,
+                }));
               }
               setError('');
             }}
@@ -211,7 +219,10 @@ export function DemoTradeForm() {
                 type='text'
                 value={config.slippage}
                 onChange={(e) =>
-                  setConfig((prev) => ({ ...prev, slippage: Number(e.target.value) }))
+                  setConfig((prev) => ({
+                    ...prev,
+                    slippage: Number(e.target.value),
+                  }))
                 }
               />
               <span className='input-symbol fee-symbol'>%</span>

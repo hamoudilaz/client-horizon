@@ -9,7 +9,7 @@ export default function Transfer() {
 
         <div className='trade-form'>
           <div className='trade-container main-trade-container'>
-            <TransferCard/>
+            <TransferCard />
           </div>
         </div>
       </div>
