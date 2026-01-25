@@ -1,14 +1,33 @@
 import { useState, useEffect, useRef } from 'react';
-import { executeSwap } from '../services/buy.js';
 import { ClipLoader } from 'react-spinners';
-import { sellToken } from '../services/sell.js';
-import { usePubKey } from '../utils/usePubKey.ts';
 import { Switches } from './ui/Switch.tsx';
-import { rateLimit } from '../services/buy.ts';
-import { wsolRef, type settings, type InputEvent } from '../utils/constants.ts';
+import { rateLimit } from '../services/trade';
+import {
+  wsolRef,
+  type settings,
+  type InputEvent,
+  type SwapResponse,
+  type SellResponse,
+} from '../utils/constants.ts';
 import validateInputs from '../utils/validateForm.ts';
 
-export function TradeForm() {
+export interface TradeFormProps {
+  isDemo?: boolean;
+  executeSwap: (config: settings) => Promise<SwapResponse>;
+  sellToken: (config: settings) => Promise<SellResponse>;
+  onTradeComplete?: () => void;
+  onAuthError?: () => void;
+  enableRateLimit?: boolean;
+}
+
+export function TradeForm({
+  isDemo = false,
+  executeSwap,
+  sellToken,
+  onTradeComplete,
+  onAuthError,
+  enableRateLimit = false,
+}: TradeFormProps) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [mess, setMess] = useState('');
@@ -28,7 +47,6 @@ export function TradeForm() {
     node: false,
   });
 
-  const { setPubKey } = usePubKey();
   const modeRef = useRef(mode);
 
   useEffect(() => {
@@ -44,17 +62,20 @@ export function TradeForm() {
   }, [cache]);
 
   async function buy(cfg: settings) {
-    setLoading(true);
     try {
       const response = await executeSwap(cfg);
       console.log(response);
-      if (response?.limit) {
+      if (enableRateLimit && response?.limit) {
         rateLimit(setlimit, setError, response.retryAfter || 20);
       }
 
       if (response.error) {
-        if (response.error.startsWith('Internal Server Error: pubKey is undefined'))
-          return setPubKey(null);
+        if (
+          onAuthError &&
+          response.error.startsWith('Internal Server Error: pubKey is undefined')
+        ) {
+          return onAuthError();
+        }
         console.log(response.error);
         setError(response.error);
       } else {
@@ -66,6 +87,7 @@ export function TradeForm() {
       console.error(error);
     } finally {
       setLoading(false);
+      onTradeComplete?.();
     }
   }
 
@@ -74,7 +96,7 @@ export function TradeForm() {
     console.log(config);
     console.log('VALIDATING MODE:', mode);
 
-    const result = validateInputs(config, wsol, mode, false);
+    const result = validateInputs(config, wsol, mode, isDemo);
 
     if (result !== true) {
       setError(result);
@@ -97,18 +119,27 @@ export function TradeForm() {
     e.preventDefault();
 
     if (!validateForm()) return;
+
+    setLoading(true);
     setError('');
     setMess('');
 
     if (mode) {
       await buy(config);
     } else {
-      const response = await sellToken(config);
-      if (response.error) {
-        setError(response.error);
-      } else {
-        setTimer(response.end);
-        setMess(response.message);
+      try {
+        const response = await sellToken(config);
+        if (response.error) {
+          setError(response.error);
+        } else {
+          setTimer(response.end || '');
+          setMess(response.message || '');
+        }
+      } catch (error: unknown) {
+        setError((error as Error).message);
+      } finally {
+        setLoading(false);
+        onTradeComplete?.();
       }
     }
   };
@@ -287,7 +318,12 @@ export function TradeForm() {
           </button>
         </div>
 
-        <button className='buy-btn bttn buybtn' type='submit' disabled={loading || limit}>
+        <button
+          className='buy-btn bttn buybtn'
+          type='submit'
+          disabled={loading || (enableRateLimit && limit)}
+          style={{ minHeight: '48px' }}
+        >
           {loading ? (
             <span className='text'>
               <ClipLoader size={20} color='#fff' />
@@ -299,16 +335,42 @@ export function TradeForm() {
 
         {cache && <span className={`status1 success ${cacheVisible ? 'show' : ''}`}>{cache}</span>}
 
-        {loading ? (
-          <span className='status'>Executing ...</span>
-        ) : (
-          error && <span className='status'>{error}</span>
+        {(loading || error || mess) && (
+          <div
+            style={{
+              width: '100%',
+              minHeight: '50px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {loading ? (
+              <span className='status' style={{ width: '100%' }}>
+                Executing ...
+              </span>
+            ) : (
+              <>
+                {error && (
+                  <span className='status' style={{ width: '100%' }}>
+                    {error}
+                  </span>
+                )}
+                {mess && (
+                  <a
+                    href={mess}
+                    target='_blank'
+                    rel='noreferrer'
+                    style={{ width: '100%', textAlign: 'center' }}
+                  >
+                    <span className='text'>View on Solscan</span>
+                  </a>
+                )}
+              </>
+            )}
+          </div>
         )}
-        {mess ? (
-          <a href={mess} target='_blank' rel='noreferrer'>
-            <span className='text'>View on Solscan</span>
-          </a>
-        ) : null}
       </form>
     </>
   );

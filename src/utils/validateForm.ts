@@ -5,7 +5,6 @@ export default function validateInput(
   mode: boolean,
   demo: boolean
 ): true | string {
-  console.log('ATT VALIDATEINPUT:', config, mode);
   if (config.slippage <= 0.01 || config.slippage > 100) {
     return 'Slippage must be between 0.01% and 100%';
   }

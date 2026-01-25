@@ -3,7 +3,6 @@ import type { TokenSetter } from '../../utils/constants';
 export const handleDemoMessage = async (event: MessageEvent, setTokens: TokenSetter) => {
   const newToken = JSON.parse(event.data);
 
-  console.log(newToken);
   if (newToken.simulation || newToken.removed) {
     if (newToken.removed) {
       setTokens((prevTokens) => prevTokens.filter((t) => t.tokenMint !== newToken.tokenMint));

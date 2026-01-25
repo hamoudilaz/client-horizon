@@ -1,0 +1,96 @@
+/* Theme CSS Variables */
+:root {
+  /* Dark theme (default) */
+  --bg-primary: #0d0c11;
+  --bg-secondary: #1e1d24;
+  --bg-tertiary: #292833;
+  --bg-hover: #35333f;
+  --bg-glass: rgba(40, 40, 60, 0.3);
+
+  --text-primary: rgb(206, 206, 206);
+  --text-secondary: rgb(188, 188, 188);
+  --text-muted: rgb(149, 149, 149);
+  --text-dim: rgb(90, 90, 90);
+  --text-white: #ffffff;
+
+  --border-color: rgb(33, 19, 49);
+  --border-hover: #454545;
+  --border-accent: rgb(58, 24, 121);
+
+  --accent-primary: #6a11cb;
+  --accent-secondary: #2575fc;
+  --accent-glow: rgba(106, 17, 203, 0.5);
+  --accent-purple: rgb(69, 0, 149);
+
+  --success-color: #4caf50;
+  --success-bg: rgba(76, 175, 80, 0.1);
+  --success-dark: rgb(46, 155, 0);
+
+  --error-color: #f44336;
+  --error-bg: rgba(244, 67, 54, 0.15);
+
+  --info-color: rgb(0, 136, 255);
+
+  --hover-bg: #110f17;
+
+  --input-bg: transparent;
+  --input-text: rgb(149, 149, 149);
+
+  --button-disabled-bg: #cccccc;
+  --button-disabled-text: #666666;
+
+  --placeholder-bg: #ddd;
+
+  --shadow-box: 0px 0px 5px rgb(69, 0, 149), inset 0px 0px 5px rgb(69, 0, 149);
+  --shadow-glass:
+    0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(124, 58, 237, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Light theme - softer, warmer tones */
+[data-theme='light'] {
+  --bg-primary: #f5f5f7;
+  --bg-secondary: #eeeef1;
+  --bg-tertiary: #e4e4e8;
+  --bg-hover: #dcdce0;
+  --bg-glass: rgba(240, 240, 245, 0.85);
+
+  --text-primary: #2c2c2e;
+  --text-secondary: #48484a;
+  --text-muted: #636366;
+  --text-dim: #aeaeb2;
+  --text-white: #2c2c2e;
+
+  --border-color: #d1d1d6;
+  --border-hover: #c7c7cc;
+  --border-accent: #7c3aed;
+
+  --accent-primary: #7c3aed;
+  --accent-secondary: #3b82f6;
+  --accent-glow: rgba(124, 58, 237, 0.25);
+  --accent-purple: #7c3aed;
+
+  --success-color: #22c55e;
+  --success-bg: rgba(34, 197, 94, 0.12);
+  --success-dark: #16a34a;
+
+  --error-color: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.1);
+
+  --info-color: #3b82f6;
+
+  --hover-bg: #e8e8ec;
+
+  --input-bg: #eeeef1;
+  --input-text: #48484a;
+
+  --button-disabled-bg: #d1d1d6;
+  --button-disabled-text: #8e8e93;
+
+  --placeholder-bg: #d1d1d6;
+
+  --shadow-box: 0px 0px 12px rgba(124, 58, 237, 0.15), inset 0px 0px 6px rgba(124, 58, 237, 0.08);
+  --shadow-glass:
+    0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 6px rgba(124, 58, 237, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}

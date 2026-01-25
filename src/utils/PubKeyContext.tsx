@@ -57,7 +57,6 @@ export const PubKeyProvider = ({ children }: { children: ReactNode }) => {
     const checkSession = async () => {
       try {
         const data = await checkDemo();
-        console.log(data);
         if (data.valid) {
           setValidDemo(true);
         } else {

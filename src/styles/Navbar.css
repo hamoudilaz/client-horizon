@@ -8,6 +8,12 @@
   gap: 10px;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .horizon-text:hover {
   opacity: 0.7;
   transform: scale(1.03);
@@ -25,9 +31,7 @@
 .styleBox {
   padding: 25px;
   border-radius: 12px;
-  box-shadow:
-    0px 0px 5px rgb(69, 0, 149),
-    inset 0px 0px 5px rgb(69, 0, 149);
+  box-shadow: var(--shadow-box);
 }
 
 .copyBox {
@@ -37,19 +41,19 @@
   gap: 10px;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #454545;
+  border: 1px solid var(--border-hover);
   transition: all 0.1s ease-in-out;
 }
 
 .copyBox:hover {
-  background-color: #110f17;
-  color: white;
+  background-color: var(--hover-bg);
+  color: var(--text-white);
 }
 
 .copyBox label {
   font-size: clamp(0.7rem, 2vw, 0.9rem);
   font-weight: bold;
-  color: rgb(188, 188, 188);
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 
@@ -68,14 +72,14 @@
 
 .displayKey {
   margin: 0px;
-  color: rgb(158, 158, 158);
+  color: var(--text-muted);
   font-size: clamp(0.5rem, 2vw, 0.6rem);
 }
 
 .LogoutBtn {
   user-select: none;
   background: transparent;
-  color: white;
+  color: var(--text-white);
   border-radius: 5px;
   transition: all 0.1s ease-in-out;
   border: 1px solid transparent;
@@ -86,17 +90,17 @@
 }
 
 .LogoutBtn:hover {
-  border-color: #c2c2c2;
+  border-color: var(--text-secondary);
 }
 
 .LogoutBtn:active {
   transform: scale(1.05);
   padding: 6px;
-  border-color: #c2c2c2;
+  border-color: var(--text-secondary);
 }
 
 .info-box {
-  color: white;
+  color: var(--text-white);
   padding: 12px;
   white-space: nowrap;
   flex-shrink: 0;
@@ -113,13 +117,13 @@
 }
 
 .green {
-  color: #c6c6c6;
+  color: var(--text-secondary);
 } /* SOL */
 .yellow {
-  color: #c6c6c6;
+  color: var(--text-secondary);
 } /* WSOL */
 .blue {
-  color: #c6c6c6;
+  color: var(--text-secondary);
 } /* USD */
 
 @media (max-width: 650px) {
@@ -164,11 +168,11 @@
 .settings-buttons button {
   white-space: nowrap;
   flex: 1 1 auto;
-  background-color: #1e1d24;
+  background-color: var(--bg-secondary);
   font-weight: 500;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgb(211, 211, 211);
-  border: 1px solid #444;
+  color: var(--text-primary);
+  border: 1px solid var(--border-hover);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.9rem;
@@ -177,15 +181,15 @@
 }
 
 .settings-buttons button:hover {
-  background-color: #292833;
+  background-color: var(--bg-tertiary);
 }
 .settings-buttons button:active {
-  background-color: #35333f;
+  background-color: var(--bg-hover);
   transform: scale(0.97);
 }
 
 .settings-buttons button:focus {
   outline: none;
   border: none;
-  box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.4);
+  box-shadow: 0 0 0 2px var(--accent-glow);
 }

@@ -1,34 +1,33 @@
-import type { Token, TokenSetter, stateChangeBool } from '../../utils/constants';
+import type { stateChangeBool } from '../../utils/constants';
 
 const API_BASE = import.meta.env.VITE_API_URL || '';
 
-export const fetchTokens = async (setTokens: TokenSetter): Promise<void> => {
+// Minimum delay for loading spinner visibility
+const MIN_LOADING_DELAY = 500;
+
+export const mockUpdateBalance = async (setIsLoading: stateChangeBool) => {
+  setIsLoading(true);
+  const startTime = Date.now();
   try {
     const res = await fetch(`${API_BASE}/api/demo/tokens`, {
       method: 'GET',
       credentials: 'include',
     });
-    const data: Token[] = await res.json();
+    const data = await res.json();
 
-    console.log(data);
-
-    if (Array.isArray(data)) {
-      setTokens(data);
-    } else {
-      // If it's not an array, set it to an empty array to prevent the .map error
-      // and log the error from the API.
-      console.error('API did not return an array of tokens:', data);
-      setTokens([]);
+    // Ensure minimum loading time for visual feedback
+    const elapsed = Date.now() - startTime;
+    if (elapsed < MIN_LOADING_DELAY) {
+      await new Promise((resolve) => setTimeout(resolve, MIN_LOADING_DELAY - elapsed));
     }
-  } catch (error) {
-    console.error('Failed to fetch tokens:', error);
-    setTokens([]);
-  }
-};
 
-export const mockUpdateBalance = async (setIsLoading: stateChangeBool) => {
-  setIsLoading(true);
-  setTimeout(() => setIsLoading(false), 2000);
+    return data;
+  } catch (err) {
+    console.error('Error updating demo balance:', err);
+    return [];
+  } finally {
+    setIsLoading(false);
+  }
 };
 
 export const checkDemo = async () => {

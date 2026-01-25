@@ -2,8 +2,8 @@ html,
 body {
   height: 100%;
   margin: 0;
-  color: white;
-  background-color: #0d0c11 !important;
+  color: var(--text-white);
+  background-color: var(--bg-primary) !important;
 }
 
 .main-container {
@@ -19,18 +19,18 @@ body {
 form h2 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #fff;
+  color: var(--text-white);
 }
 
 .sellLoader {
-  color: white !important;
+  color: var(--text-white) !important;
 }
 
 form label {
   white-space: nowrap;
   font-size: 0.9rem;
   user-select: none;
-  color: #aaa;
+  color: var(--text-muted);
 }
 
 form input[type='text'],
@@ -41,9 +41,9 @@ form select,
   padding: 12px;
   margin-top: 6px;
   margin-bottom: 15px;
-  background-color: transparent;
-  border: 1px solid rgb(33, 19, 49);
-  color: rgb(149, 149, 149);
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  color: var(--input-text);
   border-radius: 6px;
   transition: 0.3s;
   box-sizing: border-box; /* ✅ Prevents shrinking */
@@ -51,7 +51,7 @@ form select,
 }
 
 form select {
-  background-color: #0d0c11;
+  background-color: var(--bg-primary);
   -webkit-appearance: none;
 
   appearance: none;
@@ -63,9 +63,9 @@ form select {
 
 form input:focus,
 form select:focus {
-  border-color: #6a11cb;
+  border-color: var(--accent-primary);
   outline: none;
-  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .fee-option {
@@ -102,7 +102,7 @@ form select:focus {
 }
 
 h2 {
-  color: #bcbcbc;
+  color: var(--text-secondary);
   white-space: nowrap;
   font-weight: bold;
   margin: 0px;
@@ -127,13 +127,11 @@ h2 {
   animation: fadeIn 0.3s ease-in-out forwards;
   padding: 25px;
   border-radius: 12px;
-  box-shadow:
-    0px 0px 5px rgb(69, 0, 149),
-    inset 0px 0px 5px rgb(69, 0, 149);
+  box-shadow: var(--shadow-box);
 }
 
 .tokenInfo {
-  color: #bcbcbc;
+  color: var(--text-secondary);
   font-size: small;
   padding: 4px;
   overflow-wrap: break-word;
@@ -141,7 +139,7 @@ h2 {
 
 .value {
   font-weight: bold;
-  color: rgb(46, 155, 0) !important;
+  color: var(--success-dark) !important;
 }
 
 @media (max-width: 1350px) {
@@ -202,7 +200,7 @@ form a:active {
 }
 
 .err {
-  color: #f44336;
+  color: var(--error-color);
   font-weight: bold;
   margin-top: 10px;
 }
@@ -214,9 +212,9 @@ form a:active {
 }
 
 .status {
-  color: white;
+  color: var(--text-white);
   display: block;
-  background: rgba(244, 67, 54, 0.15);
+  background: var(--error-bg);
   font-size: 0.9rem;
   font-weight: bold;
   text-align: center;
@@ -236,9 +234,9 @@ form a:active {
   transition:
     opacity 0.3s ease,
     transform 0.3s ease;
-  color: white;
+  color: var(--text-white);
   display: block;
-  background: rgba(67, 244, 54, 0.15);
+  background: var(--success-bg);
   font-size: 0.9rem;
   font-weight: bold;
   text-align: center;
@@ -257,15 +255,15 @@ form a:active {
   padding: 10px;
   border-radius: 10px;
   white-space: nowrap;
-  background: rgba(76, 175, 80, 0.1);
-  color: #4caf50;
+  background: var(--success-bg);
+  color: var(--success-color);
 }
 
 .timer {
   padding: 0px;
   font-size: 12px;
   background: transparent;
-  color: #8e8e8e;
+  color: var(--text-muted);
 }
 
 .container {
@@ -321,22 +319,22 @@ form a:active {
   border: 1px solid rgb(0 145 255);
   border-radius: 6px;
   transition: 0.3s;
-  border: 1px solid rgb(69, 0, 149) !important;
+  border: 1px solid var(--accent-purple) !important;
   box-sizing: border-box;
 }
 
 .loading:hover {
-  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
-  border-color: #6a11cb !important;
+  box-shadow: 0 0 8px var(--accent-glow);
+  border-color: var(--accent-primary) !important;
   outline: none !important;
-  background-color: #0d0c11 !important;
+  background-color: var(--bg-primary) !important;
 }
 
 .loading:focus {
-  border-color: #6a11cb;
+  border-color: var(--accent-primary);
   outline: none;
   transform: scale(1.02);
-  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .horizon-text {
@@ -376,7 +374,7 @@ form a {
 
 .text {
   text-align: center;
-  background-color: #0d0c11;
+  background-color: var(--bg-primary);
   padding: 16px 24px;
   border-radius: 8px;
   width: 100%;
@@ -421,7 +419,7 @@ li img {
 }
 
 .error-msg {
-  color: rgb(148, 50, 50);
+  color: var(--error-color);
   margin: auto;
 }
 
@@ -429,13 +427,13 @@ li img {
   float: right;
   border: none;
   background: none;
-  color: rgb(0, 74, 15);
+  color: var(--success-dark);
   border-radius: 100px;
   transition: all 0.1s ease-in-out;
 }
 
 .btn-switch:hover {
-  background-color: #0c0c0c;
+  background-color: var(--hover-bg);
 }
 
 .btn-switch:active {
@@ -457,7 +455,7 @@ li img {
   padding: 10px;
 
   font-weight: 500;
-  color: rgb(0, 136, 255);
+  color: var(--info-color);
 }
 
 .sellMsg {
@@ -473,7 +471,7 @@ li img {
   top: 43%;
   right: 12px;
   transform: translateY(-50%);
-  color: #7b7b7b;
+  color: var(--text-muted);
   pointer-events: none;
   user-select: none;
 }
@@ -484,21 +482,21 @@ li img {
 }
 
 ::placeholder {
-  color: rgb(90, 90, 90);
+  color: var(--text-dim);
 }
 
 ::-webkit-input-placeholder {
-  color: rgb(90, 90, 90);
+  color: var(--text-dim);
 }
 
 :-moz-placeholder {
-  color: rgb(90, 90, 90);
+  color: var(--text-dim);
 }
 
 ::-moz-placeholder {
-  color: rgb(90, 90, 90);
+  color: var(--text-dim);
 }
 
 :-ms-input-placeholder {
-  color: rgb(90, 90, 90);
+  color: var(--text-dim);
 }

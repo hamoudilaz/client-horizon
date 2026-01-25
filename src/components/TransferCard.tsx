@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Select, { type SelectChangeEvent } from '@mui/material/Select';
 import { Avatar } from '@mui/material';
 
 export const TransferCard = () => {
   const [selectedToken, setSelectedToken] = useState('');
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: SelectChangeEvent) => {
     setSelectedToken(event.target.value);
   };
 

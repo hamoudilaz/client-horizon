@@ -33,7 +33,7 @@ div,
 li,
 a,
 strong {
-  color: rgb(206, 206, 206);
+  color: var(--text-primary);
 }
 
 .app-layout {
@@ -42,31 +42,31 @@ strong {
   min-height: 100vh; /* This ensures the wrapper is at least as tall as the screen */
 }
 .bttn:disabled {
-  background-color: #cccccc;
-  color: #666666;
+  background-color: var(--button-disabled-bg);
+  color: var(--button-disabled-text);
   pointer-events: none;
 
   cursor: not-allowed;
 }
 .labbel {
   font-size: 0.9rem;
-  color: #ffffff;
+  color: var(--text-white);
 }
 
 .privKey {
-  color: #bcbcbc;
+  color: var(--text-secondary);
   box-sizing: border-box; /* ✅ Prevents shrinking */
 }
 
 .privKey:focus {
-  border-color: #6a11cb;
+  border-color: var(--accent-primary);
   outline: none;
-  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .pubKey {
   font-size: large;
-  color: #bcbcbc;
+  color: var(--text-secondary);
   box-sizing: border-box; /* ✅ Prevents shrinking */
 }
 
@@ -137,16 +137,16 @@ strong {
   padding: 12px;
   margin-top: 6px;
   margin-bottom: 15px;
-  background-color: transparent;
-  border: 1px solid rgb(33, 19, 49);
-  color: rgb(149, 149, 149);
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  color: var(--input-text);
   border-radius: 6px;
   transition: 0.3s;
-  border: 1px solid rgb(58, 24, 121) !important;
+  border: 1px solid var(--border-accent) !important;
   box-sizing: border-box;
 }
 
-.switch-mode.sell {
+.switch-mode {
   font-weight: 500;
 
   background: linear-gradient(350deg, #6f00e6 30%, #0051ff 100%) !important;
@@ -156,22 +156,18 @@ strong {
   color: transparent !;
 }
 
-.switch-mode.buy {
-  color: green;
-}
-
 .switch-mode:hover {
-  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
-  border-color: #6a11cb !important;
+  box-shadow: 0 0 8px var(--accent-glow);
+  border-color: var(--accent-primary) !important;
   outline: none !important;
-  background-color: #0d0c11 !important;
+  background-color: var(--bg-primary) !important;
 }
 
 .switch-mode:focus {
-  border-color: #6a11cb;
+  border-color: var(--accent-primary);
   outline: none;
   transform: scale(1.02);
-  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .config-container {
@@ -197,7 +193,7 @@ strong {
   top: 58%;
   right: 12px;
   transform: translateY(-50%);
-  color: #7b7b7b;
+  color: var(--text-muted);
   pointer-events: none;
 }
 
@@ -208,7 +204,7 @@ strong {
   border: none;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: rgb(196, 196, 196);
+  color: var(--text-primary);
   font-size: 16px;
   font-weight: 500;
   border-radius: 12px;
@@ -326,7 +322,7 @@ strong {
   padding: 24px;
 
   /* Modern glassmorphism background */
-  background: rgba(40, 40, 60, 0.3);
+  background: var(--bg-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
@@ -335,10 +331,7 @@ strong {
   border-radius: 16px;
 
   /* Modern shadow with purple tint */
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(124, 58, 237, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: var(--shadow-glass);
 
   /* Smooth transitions */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -392,7 +385,7 @@ strong {
   display: inline-block;
   width: 80px;
   height: 1.2em;
-  background-color: #ddd;
+  background-color: var(--placeholder-bg);
   border-radius: 4px;
   animation: pulse 1.5s ease-in-out infinite;
   vertical-align: middle;
@@ -420,8 +413,8 @@ h2.trade-settings {
   top: -20px;
   left: 50%;
   transform: translateX(-50%) !important;
-  background-color: #0d0c11;
-  color: rgb(175, 175, 175);
+  background-color: var(--bg-primary);
+  color: var(--text-muted);
   font-weight: bold;
   padding: 0px 2px 0 2px;
   font-size: 1.7rem;
