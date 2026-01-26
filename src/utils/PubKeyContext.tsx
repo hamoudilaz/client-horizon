@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import ws from '../services/wsClient';
+import { getWebSocket } from '../services/wsClient';
 import { useLocation } from 'react-router-dom';
 import { checkDemo } from '../services/demo/api';
 
@@ -67,11 +67,18 @@ export const PubKeyProvider = ({ children }: { children: ReactNode }) => {
         setValidDemo(false);
       }
     };
-    if (isDemo) checkSession();
+    if (isDemo) {
+      checkSession();
+    } else {
+      setValidDemo(false); // Initialize demo state for non-demo routes
+    }
   }, [isDemo]);
 
   useEffect(() => {
     const authenticateWebSocket = () => {
+      const ws = getWebSocket();
+      if (!ws) return;
+
       if (authenticated && pubKey && ws.readyState === WebSocket.OPEN) {
         const clientId = sessionStorage.getItem('clientId') ?? crypto.randomUUID();
         sessionStorage.setItem('clientId', clientId);
@@ -80,6 +87,9 @@ export const PubKeyProvider = ({ children }: { children: ReactNode }) => {
         console.log('WebSocket authenticated with pubKey:', pubKey);
       }
     };
+
+    const ws = getWebSocket();
+    if (!ws) return;
 
     if (ws.readyState === WebSocket.OPEN) {
       authenticateWebSocket();

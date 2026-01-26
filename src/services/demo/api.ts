@@ -39,7 +39,7 @@ export const checkDemo = async () => {
     const data = await res.json();
     return data;
   } catch (err) {
-    return err;
+    return { valid: false, error: err };
   }
 };
 

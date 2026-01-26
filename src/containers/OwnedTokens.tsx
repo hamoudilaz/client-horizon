@@ -1,4 +1,4 @@
-import ws from '../services/wsClient';
+import { getWebSocket } from '../services/wsClient';
 import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Loading } from '../components/ui/Loading';
@@ -42,9 +42,11 @@ export function OwnedTokens({
 
     const handler = (e: MessageEvent) => handleMessage(e, setTokens);
 
-    ws.addEventListener('message', handler);
-
-    return () => ws.removeEventListener('message', handler);
+    const ws = getWebSocket();
+    if (ws) {
+      ws.addEventListener('message', handler);
+      return () => ws.removeEventListener('message', handler);
+    }
   }, [fetchTokens, handleMessage]);
 
   const handleSell = async (token: Token, percent: number, node: boolean) => {

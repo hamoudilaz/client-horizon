@@ -456,3 +456,27 @@ h2.trade-settings {
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
+
+/* Loading state for initial app load */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-height: 50vh;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color, #e0e0e0);
+  border-top-color: var(--accent-primary, #6f00e6);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
