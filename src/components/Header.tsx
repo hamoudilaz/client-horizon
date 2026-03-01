@@ -6,6 +6,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useLocation } from 'react-router-dom';
 import CopyContainer from './ui/Copy';
 import AlertDialog from './ui/ConfirmDialog';
+import { ThemeToggle } from './ThemeToggle';
 
 export function Header() {
   const { pubKey, setPubKey, authenticated, setAuthenticated, demo } = usePubKey();
@@ -60,6 +61,7 @@ export function Header() {
           </>
         )}
       </nav>
+      <ThemeToggle />
     </>
   );
 }

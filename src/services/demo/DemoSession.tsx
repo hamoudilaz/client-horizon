@@ -22,7 +22,6 @@ function Wallet() {
       return;
     }
     setValidDemo(true);
-    console.log(res);
   };
 
   return (

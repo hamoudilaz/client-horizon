@@ -35,6 +35,12 @@ export type SwapResponse = {
   end?: string;
 };
 
+export type SellResponse = {
+  error?: string;
+  message?: string;
+  end?: string;
+};
+
 export type ownAmount = {
   usdValue: number;
   SOL: number;

@@ -1,38 +1,28 @@
-import type { Token, TokenSetter, stateChangeBool } from '../utils/constants';
+import type { stateChangeBool } from '../utils/constants';
 
 const API_BASE = import.meta.env.VITE_API_URL || '';
 
-export const fetchTokens = async (setTokens: TokenSetter): Promise<void> => {
+export const updateBalance = async (setIsLoading: stateChangeBool) => {
+  setIsLoading(true);
   try {
-    const res = await fetch(`${API_BASE}/api/tokens`, {
+    const res = await fetch(`${API_BASE}/api/balance`, {
       method: 'GET',
       credentials: 'include',
     });
-    const data: Token[] = await res.json();
 
-    console.log(data);
-
-    if (!data) return;
-    setTokens(data);
-  } catch (error) {
-    console.error('Failed to fetch tokens:', error);
+    const data = await res.json();
+    if (!data || data.error) {
+      console.error('Error fetching price');
+      return;
+    }
+    return data.portfolio;
+  } finally {
+    setIsLoading(false);
   }
 };
 
-export const updateBalance = async (setIsLoading: stateChangeBool) => {
-  setIsLoading(true);
-  const res = await fetch(`${API_BASE}/api/balance`, {
-    method: 'GET',
-    credentials: 'include',
-  });
-
-  const data = await res.json();
-  console.log(data);
-  if (!data || data.error) {
-    return console.error('Error fetching price');
-  }
-  return data.portfolio;
-};
+// Minimum delay for loading spinner visibility
+const MIN_LOADING_DELAY = 500;
 
 export const updateSingleTokenBalance = async (
   setIsLoading: stateChangeBool,
@@ -40,23 +30,36 @@ export const updateSingleTokenBalance = async (
   tokenBalance: number
 ) => {
   setIsLoading(true);
-  const res = await fetch(`${API_BASE}/api/single/balance`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      tokenMint: tokenMint,
-      tokenBalance: tokenBalance,
-    }),
-  });
+  const startTime = Date.now();
+  try {
+    const res = await fetch(`${API_BASE}/api/single/balance`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tokenMint: tokenMint,
+        tokenBalance: tokenBalance,
+      }),
+    });
 
-  const data = await res.json();
-  if (!data || data.error) {
-    return console.error('Error fetching price');
+    const data = await res.json();
+
+    // Ensure minimum loading time for visual feedback
+    const elapsed = Date.now() - startTime;
+    if (elapsed < MIN_LOADING_DELAY) {
+      await new Promise((resolve) => setTimeout(resolve, MIN_LOADING_DELAY - elapsed));
+    }
+
+    if (!data || data.error) {
+      console.error('Error fetching price');
+      return;
+    }
+    return Number(data.usdValue);
+  } finally {
+    setIsLoading(false);
   }
-  return Number(data.usdValue);
 };
 
 export const cleanWallet = async (isHardCleanup: boolean) => {
@@ -69,9 +72,9 @@ export const cleanWallet = async (isHardCleanup: boolean) => {
   });
 
   const data = await res.json();
-  console.log(data);
   if (!data || data.error) {
-    return console.error('Error fetching price');
+    console.error('Error cleaning wallet');
+    return;
   }
   return data;
 };

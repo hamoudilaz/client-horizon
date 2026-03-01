@@ -23,13 +23,10 @@ export function TokenItem({ token, loadingStates, handleSell }: Props) {
               const mint = token.tokenMint;
               const totalTokens = token.tokenBalance;
 
-              setIsLoading(true);
               const newTokenValue = await updateSingleTokenBalance(setIsLoading, mint, totalTokens);
               if (typeof newTokenValue === 'number') {
                 token.usdValue = newTokenValue;
               }
-
-              setIsLoading(false);
             }}
           >
             Refresh token

@@ -18,17 +18,23 @@ const App = () => {
     document.title = `Horizon | ${name.charAt(0).toUpperCase() + name.slice(1)}`;
   }, [location.pathname]);
 
-  if ((!isDemo && authenticated === null) || (demo === null && authenticated === null)) return null;
+  const isLoading = (!isDemo && authenticated === null) || (isDemo && demo === null);
 
   return (
     <div className='app-layout'>
       <Header />
-      <Routes>
-        <Route path='/start' element={!pubKey ? <Wallet /> : <Navigate to='/dashboard' />} />
-        <Route path='/dashboard' element={pubKey ? <Dashboard /> : <Navigate to='/' />} />
-        <Route path='/demo' element={<Demo />} />
-        <Route path='*' element={<Navigate to='/start' />} />
-      </Routes>
+      {isLoading ? (
+        <div className='loading-container'>
+          <div className='loading-spinner' />
+        </div>
+      ) : (
+        <Routes>
+          <Route path='/start' element={!pubKey ? <Wallet /> : <Navigate to='/dashboard' />} />
+          <Route path='/dashboard' element={pubKey ? <Dashboard /> : <Navigate to='/' />} />
+          <Route path='/demo' element={<Demo />} />
+          <Route path='*' element={<Navigate to='/start' />} />
+        </Routes>
+      )}
     </div>
   );
 };
